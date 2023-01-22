@@ -1,12 +1,14 @@
 import './globals.css'
 import { Navbar } from 'ui/navbar'
-import cn from 'classnames'
+import { Review } from '../ui/review'
 import NextLink from 'next/link'
 
 interface Nav {
 	href: string
 	text: string
 }
+
+export const dynamic = 'force-dynamic'
 
 const NavItem = ({ href, text }: Nav) => {
 	return (
@@ -26,30 +28,14 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className='bg-gradient-to-r from-cyan-500 to-blue-500'>
-				<Navbar />
-				<div>{children}</div>
+			<body className='bg-gray-800'>
+				<div className='container lg:max-w-7xl lg:flex md:flex mx-auto min-h-screen h-screen'>
+					<Navbar />
+					<main className='flex-1 min-w-0 overflow-auto bg-gray-800 px-2'>
+						{children}
+					</main>
+				</div>
 			</body>
 		</html>
-		// <html lang='en'>
-		// 	<head />
-		// 	<body className='min-h-screen dark:bg-slate-700 dark: text-white'>
-		// 		<div className='header bg-teal-700 text-white sticky'>
-		// 			<section className='max-w-2xl mx-auto p-4 flex justify-between items-center'>
-		// 				<h1>Pokemon</h1>
-		// 				<NavItem href='/gen' text='gen' />
-		// 				<div className='flex gap-2'>
-		// 					<button className='bg-gray-500 text-black flex ml-auto border-0 py-2 px-12 focus:outline-none hover:bg-indigo-600 rounded'>
-		// 						Search
-		// 					</button>
-		// 					<button className='bg-blue-300 text-black rounded flex ml-auto border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600'>
-		// 						Login
-		// 					</button>
-		// 				</div>
-		// 			</section>
-		// 		</div>
-		// 		<div>{children}</div>
-		// 	</body>
-		// </html>
 	)
 }
