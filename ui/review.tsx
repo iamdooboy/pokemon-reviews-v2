@@ -1,7 +1,7 @@
 export const Review = () => {
 	return (
 		<article>
-			<div className='flex sm:flex-col mb-4 space-x-4'>
+			<div className='flex mb-4 space-x-4'>
 				<img
 					className='w-10 h-10 rounded-full'
 					src='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
