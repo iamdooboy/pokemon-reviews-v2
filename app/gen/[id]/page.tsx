@@ -1,7 +1,7 @@
 import axios from 'axios'
 import NextLink from 'next/link'
 
-export async function getGen(id: string) {
+async function getGen(id: string) {
 	const res = await axios
 		.get(`https://funny-elk-apron.cyclic.app/api/gen/${id}`)
 		.then(res => res.data)
