@@ -1,26 +1,6 @@
 import './globals.css'
-import { Navbar } from 'ui/navbar'
-import { Review } from '../ui/review'
-import { Sidebar } from '../ui/sidebar'
-import NextLink from 'next/link'
-
-interface Nav {
-	href: string
-	text: string
-}
 
 export const dynamic = 'force-dynamic'
-
-const NavItem = ({ href, text }: Nav) => {
-	return (
-		<NextLink
-			href={href}
-			className='font-normal text-gray-600 dark:text-gray-400 hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all'
-		>
-			<span className='capsize'>{text}</span>
-		</NextLink>
-	)
-}
 
 export default function RootLayout({
 	children
@@ -29,7 +9,35 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className='bg-gray-800'>{children}</body>
+			<body className='bg-gray-800 min-h-screen'>
+				<div className='sticky top-0 flex content-center w-full max-w-full z-40 min-h-[64px] bg-blue-900'>
+					<header className='mx-auto flex flex-row justify-between content-between w-full'>
+						<div className='flex flex-1 content-center items-center'>
+							<button>Review</button>
+						</div>
+						<div className='flex flex-1 content-center items-center w-full'>
+							<button>Review</button>
+						</div>
+						<div className='flex flex-1 content-center items-center'>
+							<div className='ml-auto'>
+								<span className='box-border'>
+									<div className='flex items-center'>
+										<div className='pointer-events-auto'></div>
+									</div>
+									<div className='flex items-stretch content-start flex-1'>
+										<img
+											src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
+											className='rounded-full w-10'
+											alt='Avatar'
+										/>
+									</div>
+								</span>
+							</div>
+						</div>
+					</header>
+				</div>
+				{children}
+			</body>
 		</html>
 	)
 }
