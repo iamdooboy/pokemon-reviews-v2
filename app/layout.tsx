@@ -1,17 +1,23 @@
 import './globals.css'
+import { clsx } from 'clsx'
 
-export const dynamic = 'force-dynamic'
+import { Inter as FontSans } from '@next/font/google'
 
-export default function RootLayout({
-	children
-}: {
+const fontSans = FontSans({
+	subsets: ['latin'],
+	variable: '--font-sans'
+})
+
+interface RootLayoutProps {
 	children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang='en'>
-			<body className='bg-gray-800 min-h-screen'>
-				<div className='sticky top-0 flex content-center w-full max-w-full z-40 min-h-[64px] bg-blue-900'>
-					<header className='mx-auto flex flex-row justify-between content-between w-full'>
+			<body className={clsx('bg-gray-800 min-h-screen', fontSans.variable)}>
+				<div className='sticky top-0 flex content-center w-full max-w-full z-40 min-h-[64px] bg-gray-800'>
+					<header className='mx-auto flex flex-row justify-between content-between w-full border-b border-gray-600'>
 						<div className='flex flex-1 content-center items-center'>
 							<button>Review</button>
 						</div>
