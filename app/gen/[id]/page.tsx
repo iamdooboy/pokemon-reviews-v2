@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Grid } from '../../../ui/grid'
+import { TestGrid } from 'ui/test-grid'
 
 async function getGen(id: string) {
 	const res = await axios

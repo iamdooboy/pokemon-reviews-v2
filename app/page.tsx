@@ -7,7 +7,11 @@ export default function Page() {
 			{Array(9)
 				.fill(1)
 				.map((_, i) => (
-					<NextLink className='bg-slate-600 text-white' href={`/gen/${i + 1}`}>
+					<NextLink
+						key={i}
+						className='bg-slate-600 text-white'
+						href={`/gen/${i + 1}`}
+					>
 						Gen {i + 1}{' '}
 					</NextLink>
 				))}

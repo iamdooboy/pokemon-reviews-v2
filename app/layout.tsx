@@ -1,6 +1,7 @@
 import './globals.css'
 import { clsx } from 'clsx'
 import { Header } from '../ui/header'
+import { GlobalContextProvider } from './context/store'
 
 import { Inter as FontSans } from '@next/font/google'
 
@@ -17,8 +18,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang='en'>
 			<body className={clsx('bg-gray-800 min-h-screen', fontSans.variable)}>
-				<Header />
-				{children}
+				<GlobalContextProvider>
+					<Header />
+					{children}
+				</GlobalContextProvider>
 			</body>
 		</html>
 	)
