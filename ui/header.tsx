@@ -33,7 +33,7 @@ export const Header = () => {
 								<SearchButton />
 								<img
 									src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
-									className='rounded-full w-10'
+									className='rounded-full w-10 hidden sm:inline'
 									alt='Avatar'
 								/>
 							</div>

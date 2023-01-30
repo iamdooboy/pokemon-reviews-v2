@@ -1,11 +1,10 @@
-import axios from 'axios'
-import { Grid } from '../../../ui/grid'
-import { TestGrid } from 'ui/test-grid'
+import { Grid } from '@/ui/grid'
+//import { TestGrid } from 'ui/test-grid'
 
 async function getGen(id: string) {
-	const res = await axios
-		.get(`https://funny-elk-apron.cyclic.app/api/gen/${id}`)
-		.then(res => res.data)
+	const res = fetch(`https://funny-elk-apron.cyclic.app/api/gen/${id}`).then(
+		async res => await res.json()
+	)
 	return res
 }
 

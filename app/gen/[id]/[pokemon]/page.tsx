@@ -1,6 +1,7 @@
 import { Review } from 'ui/review'
 import { Sidebar } from 'ui/sidebar'
-import axios from 'axios'
+import { BottomButtons } from 'ui/review/bottom-buttons'
+import { pb } from '@/lib/pocketbase'
 
 interface PokemonProps {
 	params: {
@@ -8,19 +9,49 @@ interface PokemonProps {
 	}
 }
 
+interface Records {
+	id: string
+	text: string
+	expand: {
+		user: {
+			username: string
+		}
+	}
+	rating: number
+	pokedex: {
+		pokemon: string
+	}
+	created: string
+	gen: number
+}
+
 const getPokemon = async (pokemon: string) => {
-	const res = axios
-		.get(`https://funny-elk-apron.cyclic.app/api/pokemon/${pokemon}`)
-		.then(res => res.data)
+	const res = fetch(
+		`https://funny-elk-apron.cyclic.app/api/pokemon/${pokemon}`
+	).then(async res => await res.json())
 
 	return res
+}
+const getReviews = async (pokemon: string): Promise<Records[]> => {
+	try {
+		const records = await pb.collection('reviews').getList<Records>(1, 30, {
+			filter: `pokedex.pokemon='${pokemon}'`,
+			expand: 'user',
+			$autoCancel: false
+		})
+		return records.items
+	} catch (error) {
+		console.log(error)
+		return []
+	}
 }
 
 export default async function Page({ params }: PokemonProps) {
 	const data = await getPokemon(params.pokemon)
+	const reviews = await getReviews(params.pokemon)
 	return (
-		<>
-			<div className='initial sm:sticky top-[64px] self-start col-span-3 p-5'>
+		<div className='sm:grid sm:grid-cols-8 h-[calc(100vh-64px)]'>
+			<div className='block sm:sticky top-[64px] self-start col-span-3 p-5'>
 				<div className='flex items-stretch justify-between mb-4'>
 					<a
 						href='#'
@@ -44,14 +75,24 @@ export default async function Page({ params }: PokemonProps) {
 				<div className='flex flex-col relative min-w-[1px] max-w-full content-start item-stretch'>
 					<Sidebar data={data} />
 				</div>
+				<BottomButtons pokemon={data.name} />
 			</div>
-			<div className='col-span-5 p-5 overflow-auto sm:border-l border-gray-600'>
-				<Review />
-				<Review />
-				<Review />
-				<Review />
-				<Review />
+			<div className='p-5 col-span-5 overflow-auto sm:border-l border-gray-600'>
+				{reviews.length === 0 && (
+					<div className='text-gray-400 bg-gray-700 font-bold border border-gray-600 flex justify-center rounded-lg py-10'>
+						There are no reviews
+					</div>
+				)}
+				{reviews.map(review => (
+					<Review
+						key={review.id}
+						username={review.expand.user.username}
+						date={review.created}
+						rating={review.rating}
+						text={review.text}
+					/>
+				))}
 			</div>
-		</>
+		</div>
 	)
 }

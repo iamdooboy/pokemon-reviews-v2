@@ -1,29 +1,40 @@
 'use client'
+
 import { useState } from 'react'
 import { SearchModal } from './search-modal'
-import { useGlobalContext } from 'app/context/store'
+import { useGlobalContext } from 'context/store'
 import { Input } from './input'
 import { SearchResults } from './search-results'
+import { useSearch } from 'hooks/useSearch'
 
 export const SearchButton = () => {
 	const [showModal, setShowModal] = useState(false)
 	const { pokemon, setPokemon } = useGlobalContext()
+	const { onChange, filteredList, setFilteredList, activeIndex } = useSearch()
 
 	const onClickHandler = async () => {
 		setShowModal(true)
 
-		const res = await fetch(
-			'https://funny-elk-apron.cyclic.app/api/pokemon'
-		).then(async res => await res.json())
+		if (pokemon.length === 0) {
+			const res = await fetch(
+				'https://funny-elk-apron.cyclic.app/api/pokemon'
+			).then(async res => await res.json())
 
-		setPokemon(res)
+			setPokemon(res)
+		}
 	}
+
+	const closeModal = () => {
+		setShowModal(false)
+		setFilteredList([])
+	}
+
 	return (
 		<>
 			<button
 				onClick={onClickHandler}
 				type='button'
-				className='border pr-8 border-gray-600 focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-auto items-center text-gray-600 inline-flex mr-2'
+				className='border pr-8 border-gray-600 focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-auto items-center text-gray-600 inline-flex mr-2 sm:py-2'
 			>
 				<div className='mx-3'>
 					<svg
@@ -43,9 +54,9 @@ export const SearchButton = () => {
 				</div>
 				Search Pokemon
 			</button>
-			<SearchModal visible={showModal} close={() => setShowModal(false)}>
-				<Input>
-					<SearchResults />
+			<SearchModal visible={showModal} close={closeModal}>
+				<Input onChange={onChange}>
+					<SearchResults list={filteredList} close={closeModal} />
 				</Input>
 			</SearchModal>
 		</>

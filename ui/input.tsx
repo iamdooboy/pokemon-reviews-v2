@@ -1,16 +1,19 @@
 'use client'
 
+import { ChangeEventHandler } from 'react'
+
 type InputProps = {
+	onChange: ChangeEventHandler<HTMLInputElement>
 	children: React.ReactNode
 }
 
-export const Input = ({ children }: InputProps) => (
+export const Input = ({ onChange, children }: InputProps) => (
 	<div
 		onClick={e => e.stopPropagation()} //prevent closing modal if content inside is clicked
 		className='relative rounded-lg shadow bg-gray-700'
 	>
 		<div className='flex items-center justify-between rounded-t border-gray-600'>
-			<form className='flex flex-col items-start w-full gap-1 p-4'>
+			<form className='flex flex-col items-start w-full gap-2 p-4'>
 				<div className='relative w-full flex items-center gap-3 py-4 px-2'>
 					<svg
 						aria-hidden='true'
@@ -27,6 +30,8 @@ export const Input = ({ children }: InputProps) => (
 					</svg>
 
 					<input
+						onChange={onChange}
+						max='1008'
 						autoFocus
 						type='text'
 						placeholder='Seach Pokemon'

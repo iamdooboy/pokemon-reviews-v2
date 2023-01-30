@@ -4,6 +4,7 @@ import Image from 'next/image'
 import * as React from 'react'
 import { clsx } from 'clsx'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 interface Props {
 	id: string
@@ -108,7 +109,7 @@ export const BlurImage = React.forwardRef((props: Props, ref: any) => {
 	const [isLoading, setLoading] = React.useState(true)
 	const gen = pathname?.charAt(pathname.length - 1)
 	return (
-		<a href={`/gen/${gen}/${props.name}`}>
+		<Link href={`/gen/${gen}/${props.name}`}>
 			<div className='mx-auto'>
 				<div
 					ref={ref}
@@ -139,6 +140,6 @@ export const BlurImage = React.forwardRef((props: Props, ref: any) => {
 				</div>
 				{/* <Rating /> */}
 			</div>
-		</a>
+		</Link>
 	)
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { Rating } from './rating'
 
 interface Props {
@@ -10,6 +10,7 @@ interface DataProps {
 	image: string
 	id: string
 	types: [string, string]
+	jpn: string
 }
 
 export interface Types {
@@ -57,6 +58,7 @@ const toDefault: Types = {
 	steel: 'to-steel-default',
 	water: 'to-water-default'
 }
+
 const toLight: Types = {
 	bug: 'to-bug-light',
 	dark: 'to-dark-light',
@@ -78,7 +80,7 @@ const toLight: Types = {
 	water: 'to-water-light'
 }
 
-export const Sidebar: React.FC<Props> = ({ data }): JSX.Element => {
+export const Sidebar: FC<Props> = ({ data }): JSX.Element => {
 	return (
 		<div className='flex flex-col items-stretch justify-start grid-gap'>
 			<div
@@ -92,8 +94,8 @@ export const Sidebar: React.FC<Props> = ({ data }): JSX.Element => {
 				>
 					<div>
 						<div className='p-2 bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-2 border-gray-500'>
-							<div className='fixed text-5xl lg:text-6xl md:text-3xl font-bold opacity-25 text-white'>
-								リザードン
+							<div className='fixed text-5xl lg:text-5xl md:text-3xl font-bold opacity-25 text-white'>
+								{data.jpn}
 							</div>
 							<img src={data.image} alt={data.name} />
 						</div>

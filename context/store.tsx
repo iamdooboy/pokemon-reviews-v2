@@ -14,6 +14,8 @@ interface Pokemon {
 	forms: Variations[]
 	image: Variations[]
 	default: string
+	jpn: string
+	gen: string
 }
 
 interface Variations {
