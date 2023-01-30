@@ -33,7 +33,7 @@ const OutlineStar = () => (
 
 export const Form = ({ pokemon }: Props) => {
 	const [rating, setRating] = useState(0)
-	const [hover, setHover] = useState(0)
+	const [_, setHover] = useState(0)
 
 	return (
 		<form

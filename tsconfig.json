@@ -9,7 +9,8 @@
 			"@/ui/*": ["ui/*"],
 			"@/pages/*": ["pages/*"],
 			"@/lib/*": ["lib/*"],
-			"@/styles/*": ["styles/*"]
+			"@/styles/*": ["styles/*"],
+			"@/types/*": ["typings/*"]
 		},
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,

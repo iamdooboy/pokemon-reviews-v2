@@ -2,9 +2,9 @@ import { Grid } from '@/ui/grid'
 //import { TestGrid } from 'ui/test-grid'
 
 async function getGen(id: string) {
-	const res = fetch(`https://funny-elk-apron.cyclic.app/api/gen/${id}`).then(
-		async res => await res.json()
-	)
+	const res = await fetch(
+		`https://funny-elk-apron.cyclic.app/api/gen/${id}`
+	).then(async res => await res.json())
 	return res
 }
 

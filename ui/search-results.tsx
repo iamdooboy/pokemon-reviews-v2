@@ -1,15 +1,10 @@
 import Link from 'next/link'
 import { MouseEventHandler } from 'react'
+import { Pokemon } from 'types/typings'
 
 interface ListProps {
 	list: Pokemon[]
 	close: MouseEventHandler<HTMLAnchorElement>
-}
-
-interface Pokemon {
-	id: string
-	name: string
-	gen: string
 }
 
 export const SearchResults = ({ close, list }: ListProps) => {

@@ -1,30 +1,11 @@
 'use client'
 import * as React from 'react'
+import { Pokemon } from 'types/typings'
 
 interface ContextProps {
 	pokemon: Pokemon[]
 	setPokemon: React.Dispatch<React.SetStateAction<Pokemon[]>>
 }
-
-interface Pokemon {
-	id: string
-	name: string
-	types: Types
-	mega: Variations[]
-	forms: Variations[]
-	image: Variations[]
-	default: string
-	jpn: string
-	gen: string
-}
-
-interface Variations {
-	name: string
-	types: Types
-	image: string
-}
-
-type Types = [string, string]
 
 interface GlobalContextProps {
 	children: React.ReactNode

@@ -2,6 +2,7 @@ import { Review } from 'ui/review'
 import { Sidebar } from 'ui/sidebar'
 import { BottomButtons } from 'ui/review/bottom-buttons'
 import { pb } from '@/lib/pocketbase'
+import { Pokemon, Records } from 'types/typings'
 
 interface PokemonProps {
 	params: {
@@ -9,28 +10,30 @@ interface PokemonProps {
 	}
 }
 
-interface Records {
-	id: string
-	text: string
-	expand: {
-		user: {
-			username: string
-		}
-	}
-	rating: number
-	pokedex: {
-		pokemon: string
-	}
-	created: string
-	gen: number
-}
-
 const getPokemon = async (pokemon: string) => {
-	const res = fetch(
-		`https://funny-elk-apron.cyclic.app/api/pokemon/${pokemon}`
-	).then(async res => await res.json())
+	try {
+		const res = await fetch(
+			`https://funny-elk-apron.cyclic.app/api/pokemon/${pokemon}`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				}
+			}
+		)
 
-	return res
+		const data: Pokemon = await res.json()
+		return data
+	} catch (error) {
+		const data: Pokemon = {
+			id: '',
+			name: '',
+			types: ['fire', 'fire'],
+			image: '',
+			jpn: ''
+		}
+		return data
+	}
 }
 const getReviews = async (pokemon: string): Promise<Records[]> => {
 	try {

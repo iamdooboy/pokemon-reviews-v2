@@ -1,26 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useGlobalContext } from 'context/store'
-
-interface Pokemon {
-	id: string
-	name: string
-	types: Types
-	mega: Variations[]
-	forms: Variations[]
-	image: Variations[]
-	default: string
-	jpn: string
-	gen: string
-}
-
-interface Variations {
-	name: string
-	types: Types
-	image: string
-}
-
-type Types = [string, string]
+import { Pokemon } from 'types/typings'
 
 const isNumber = (input: string) => {
 	if (input === '') {

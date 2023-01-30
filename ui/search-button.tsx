@@ -10,7 +10,7 @@ import { useSearch } from 'hooks/useSearch'
 export const SearchButton = () => {
 	const [showModal, setShowModal] = useState(false)
 	const { pokemon, setPokemon } = useGlobalContext()
-	const { onChange, filteredList, setFilteredList, activeIndex } = useSearch()
+	const { onChange, filteredList, setFilteredList } = useSearch()
 
 	const onClickHandler = async () => {
 		setShowModal(true)

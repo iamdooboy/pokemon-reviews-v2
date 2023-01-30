@@ -1,26 +1,23 @@
 'use client'
-import { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { BlurImage } from './blur-image'
+import { Pokemon } from 'types/typings'
 
 interface PokemonArray {
 	pokemon: Pokemon[]
 }
 
-interface Pokemon {
-	id: string
-	name: string
-	types: [string, string]
-	image: string
-	default: string
-}
-
 export const Grid = ({ pokemon }: PokemonArray) => {
-	const [items, setItems] = useState(pokemon)
+	const [items, SetItems] = useState<[] | Pokemon[]>([])
 	const [visible, setVisible] = useState(24)
 	const ref = useRef<IntersectionObserver | null>(null)
 
+	useEffect(() => {
+		SetItems(pokemon)
+	}, [])
+
 	const lastPostRef = useCallback(
-		(post: any) => {
+		(post: HTMLElement) => {
 			if (ref.current) ref.current.disconnect()
 
 			ref.current = new IntersectionObserver(
@@ -36,6 +33,7 @@ export const Grid = ({ pokemon }: PokemonArray) => {
 		},
 		[visible]
 	)
+
 	return (
 		<div className='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
 			<div className='grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 xl:gap-x-8'>

@@ -1,19 +1,11 @@
-import { FC } from 'react'
 import { Rating } from './rating'
+import { Pokemon } from 'types/typings'
 
 interface Props {
-	data: DataProps
+	data: Pokemon
 }
 
-interface DataProps {
-	name: string
-	image: string
-	id: string
-	types: [string, string]
-	jpn: string
-}
-
-export interface Types {
+interface Types {
 	[type: string]: string
 }
 
@@ -80,13 +72,15 @@ const toLight: Types = {
 	water: 'to-water-light'
 }
 
-export const Sidebar: FC<Props> = ({ data }): JSX.Element => {
+export const Sidebar = ({ data }: Props) => {
 	return (
 		<div className='flex flex-col items-stretch justify-start grid-gap'>
 			<div
 				className={`rounded-lg p-[3px] bg-gradient-to-br ${
-					fromDefault[data.types[0]]
-				} ${data.types[1] ? toDefault[data.types[1]] : toLight[data.types[0]]}`}
+					fromDefault[data.types![0]]
+				} ${
+					data.types![1] ? toDefault[data.types![1]] : toLight[data.types![0]]
+				}`}
 			>
 				<div
 					className='h-full w-full bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 p-4
@@ -111,7 +105,7 @@ export const Sidebar: FC<Props> = ({ data }): JSX.Element => {
 						<div className='flex items-center justify-between'>
 							<div className='flex flex-col gap-2'>
 								<div className='flex gap-2'>
-									{data.types.map(type => (
+									{data.types!.map((type: string | undefined) => (
 										<img
 											key={type}
 											className='w-12 sm:w-10 lg:w-12'
