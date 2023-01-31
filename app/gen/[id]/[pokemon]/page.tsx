@@ -30,7 +30,8 @@ const getPokemon = async (pokemon: string) => {
 			name: '',
 			types: ['fire', 'fire'],
 			image: '',
-			jpn: ''
+			jpn: '',
+			gen: 0
 		}
 		return data
 	}
@@ -78,7 +79,7 @@ export default async function Page({ params }: PokemonProps) {
 				<div className='flex flex-col relative min-w-[1px] max-w-full content-start item-stretch'>
 					<Sidebar data={data} />
 				</div>
-				<BottomButtons pokemon={data.name} />
+				<BottomButtons pokemon={data.name} gen={data.gen} />
 			</div>
 			<div className='p-5 col-span-5 overflow-auto sm:border-l border-gray-600'>
 				{reviews.length === 0 && (

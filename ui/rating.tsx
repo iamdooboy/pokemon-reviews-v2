@@ -1,55 +1,158 @@
-import React from 'react'
-export const Rating = () => (
-	<div className='flex items-center'>
-		<svg
-			aria-hidden='true'
-			className='text-yellow-400 w-7 h-7'
-			fill='currentColor'
-			viewBox='0 0 20 20'
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<title>First star</title>
-			<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-		</svg>
-		<svg
-			aria-hidden='true'
-			className='text-yellow-400 w-7 h-7'
-			fill='currentColor'
-			viewBox='0 0 20 20'
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<title>Second star</title>
-			<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-		</svg>
-		<svg
-			aria-hidden='true'
-			className='text-yellow-400 w-7 h-7'
-			fill='currentColor'
-			viewBox='0 0 20 20'
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<title>Third star</title>
-			<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-		</svg>
-		<svg
-			aria-hidden='true'
-			className='text-yellow-400 w-7 h-7'
-			fill='currentColor'
-			viewBox='0 0 20 20'
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<title>Fourth star</title>
-			<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-		</svg>
-		<svg
-			aria-hidden='true'
-			className='text-gray-300 w-7 h-7 dark:text-gray-500'
-			fill='currentColor'
-			viewBox='0 0 20 20'
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<title>Fifth star</title>
-			<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-		</svg>
-	</div>
-)
+'use client'
+
+import { Icon } from './icon'
+import { useState } from 'react'
+
+interface PropTypes {
+	ratingInPercent?: number
+	iconSize: string
+	showOutOf: boolean
+	enableUserInteraction: boolean
+	onClick: (value: number) => void
+}
+
+const SIZES = {
+	SMALL: {
+		key: 's',
+		size: 10
+	},
+	MEDIUM: {
+		key: 'm',
+		size: 18
+	},
+	LARGE: {
+		key: 'l',
+		size: 28
+	}
+}
+
+export const Rating = (props: PropTypes) => {
+	const {
+		iconSize,
+		ratingInPercent,
+		showOutOf,
+		enableUserInteraction,
+		onClick
+	} = props
+
+	const [activeStar, setActiveStar] = useState(-1)
+	const [hover, setHover] = useState(-1)
+	const [click, setClick] = useState(false)
+	const decimal = ratingInPercent ? ratingInPercent / 20 : 0
+	const nonFraction = Math.trunc(decimal)
+	const fraction = Number((decimal - nonFraction).toFixed(2))
+	const fractionPercent = fraction * 100
+
+	const size =
+		iconSize === SIZES.SMALL.key
+			? SIZES.SMALL.size
+			: iconSize === SIZES.MEDIUM.key
+			? SIZES.MEDIUM.size
+			: SIZES.LARGE.size
+
+	const RatingHighlighted = (
+		<Icon type={'ratingHighlighted'} width={size} height={size} />
+	)
+	const RatingDefault = (
+		<Icon type={'ratingDefault'} width={size} height={size} />
+	)
+
+	const handleClick = (index: number) => {
+		onClick(index + 1)
+		setClick(true)
+		setActiveStar(index)
+	}
+
+	const handleMouseEnter = (index: number) => {
+		setHover(activeStar)
+		setActiveStar(index)
+	}
+
+	const handleMouseLeave = () => {
+		if (click) {
+			setClick(false)
+			return
+		} else {
+			setActiveStar(hover)
+		}
+	}
+
+	const showDefaultStar = () => {
+		return RatingDefault
+	}
+
+	let isShow = true
+
+	const getStar = (index: number) => {
+		if (index <= nonFraction - 1) {
+			isShow = true
+			return '100%'
+		} else if (fractionPercent > 0 && isShow) {
+			isShow = false
+			return `${fractionPercent}%`
+		} else {
+			return '0%'
+		}
+	}
+
+	const isShowOutOfStar = (index: number) => {
+		if (showOutOf) {
+			return showOutOf
+		}
+
+		if (typeof index === undefined) return
+
+		const isLoopThrough = (fraction === 0 ? nonFraction : nonFraction + 1) - 1
+		return index <= isLoopThrough
+	}
+
+	const withoutUserInteraction = (index: number) => {
+		return isShowOutOfStar(index) ? (
+			<div style={{ position: 'relative' }} key={index}>
+				<div
+					style={{
+						width: getStar(index),
+						overflow: 'hidden',
+						position: 'absolute'
+					}}
+				>
+					{RatingHighlighted}
+				</div>
+				{showDefaultStar()}
+			</div>
+		) : null
+	}
+
+	const withUserInteraction = (index: number) => {
+		return (
+			<div
+				style={{ position: 'relative' }}
+				onClick={() => handleClick(index)}
+				onMouseEnter={() => handleMouseEnter(index)}
+				onMouseLeave={handleMouseLeave}
+				key={index}
+			>
+				<div
+					style={{
+						width: index <= activeStar ? '100%' : '0%',
+						overflow: 'hidden',
+						position: 'absolute'
+					}}
+				>
+					{RatingHighlighted}
+				</div>
+				{showDefaultStar()}
+			</div>
+		)
+	}
+
+	return (
+		<div className='grid left-0 grid-flow-col relative cursor-pointer text-left gap-1'>
+			{[...new Array(5)].map((_, index) =>
+				enableUserInteraction
+					? withUserInteraction(index)
+					: withoutUserInteraction(index)
+			)}
+		</div>
+	)
+}

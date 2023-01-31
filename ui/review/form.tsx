@@ -1,44 +1,42 @@
 'use client'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { Rating } from '../rating'
+import { pb } from '@/lib/pocketbase'
 
 interface Props {
 	pokemon: string
+	gen?: number
 }
 
-const FillStar = () => (
-	<svg
-		aria-hidden='true'
-		className='text-yellow-400 w-7 h-7'
-		fill='currentColor'
-		viewBox='0 0 20 20'
-		xmlns='http://www.w3.org/2000/svg'
-	>
-		<title>Third star</title>
-		<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-	</svg>
-)
-
-const OutlineStar = () => (
-	<svg
-		aria-hidden='true'
-		className='text-gray-300 w-7 h-7 dark:text-gray-500'
-		fill='currentColor'
-		viewBox='0 0 20 20'
-		xmlns='http://www.w3.org/2000/svg'
-	>
-		<title>Fifth star</title>
-		<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
-	</svg>
-)
-
-export const Form = ({ pokemon }: Props) => {
+export const Form = ({ pokemon, gen }: Props) => {
 	const [rating, setRating] = useState(0)
-	const [_, setHover] = useState(0)
+	const [text, setText] = useState('')
+
+	const onClickHandler = (value: number): void => {
+		setRating(value)
+	}
+
+	const submitHandler = async (e: React.FormEvent) => {
+		e.preventDefault()
+		const data = {
+			text,
+			rating,
+			gen,
+			user: 'sdafasd',
+			pokedex: 'asdfasf'
+		}
+		try {
+			await pb.collection('reviews').create(data)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return (
 		<form
 			className='flex w-full max-w-sm space-x-3'
 			onClick={e => e.stopPropagation()}
+			onSubmit={submitHandler}
 		>
 			<div className='w-full max-w-2xl px-5 py-10 m-auto bg-gray-700 rounded-lg shadow'>
 				<div className='mb-6 text-3xl font-bold text-left text-white'>
@@ -55,6 +53,9 @@ export const Form = ({ pokemon }: Props) => {
 					<div className='col-span-2'>
 						<label className='text-gray-700' htmlFor='name'>
 							<textarea
+								onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+									setText(e.target.value)
+								}
 								className='flex-1 w-full px-4 py-2 text-base text-slate-400 placeholder-gray-400 bg-gray-700 border border-slate-500 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent'
 								placeholder='Enter your comment'
 								name='comment'
@@ -65,34 +66,12 @@ export const Form = ({ pokemon }: Props) => {
 					</div>
 					<div className='flex items-stretch justify-between col-span-2'>
 						<div className='flex items-center'>
-							{[...Array(rating)].map((_, index) => {
-								index += 1
-								return (
-									<button
-										type='button'
-										key={index}
-										onClick={() => setRating(index)}
-										onMouseEnter={() => setHover(index)}
-										onMouseLeave={() => setHover(rating)}
-									>
-										<FillStar />
-									</button>
-								)
-							})}
-							{[...Array(5 - rating)].map((_, index) => {
-								index += 1
-								return (
-									<button
-										type='button'
-										key={index}
-										onClick={() => setRating(index)}
-										onMouseEnter={() => setHover(index)}
-										onMouseLeave={() => setHover(rating)}
-									>
-										<OutlineStar />
-									</button>
-								)
-							})}
+							<Rating
+								iconSize='l'
+								showOutOf={true}
+								enableUserInteraction={true}
+								onClick={onClickHandler}
+							/>
 						</div>
 						<div className='col-span-2 text-right'>
 							<button
