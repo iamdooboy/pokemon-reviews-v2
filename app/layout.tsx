@@ -2,7 +2,6 @@ import './globals.css'
 import { clsx } from 'clsx'
 import { Header } from '../ui/header'
 import { GlobalContextProvider } from '../context/store'
-
 import { Inter as FontSans } from '@next/font/google'
 
 const fontSans = FontSans({

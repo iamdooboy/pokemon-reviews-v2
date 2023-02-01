@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation'
 import { Pokemon } from 'types/typings'
 
 export const BlurImage = forwardRef((props: Pokemon, ref: any) => {
-	console.log(ref)
 	const pathname = usePathname()
 	const [isLoading, setLoading] = useState(true)
 	const gen = pathname?.charAt(pathname.length - 1)

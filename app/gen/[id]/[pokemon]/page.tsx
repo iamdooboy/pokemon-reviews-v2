@@ -49,10 +49,17 @@ const getReviews = async (pokemon: string): Promise<Records[]> => {
 		return []
 	}
 }
+const getPokemonFromDb = async (pokemon: string) => {
+	const res = await pb.collection('pokedex').getList(1, 1, {
+		filter: `pokemon='${pokemon}'`
+	})
+	return res.items[0].id
+}
 
 export default async function Page({ params }: PokemonProps) {
 	const data = await getPokemon(params.pokemon)
 	const reviews = await getReviews(params.pokemon)
+	const id = await getPokemonFromDb(params.pokemon)
 	return (
 		<div className='sm:grid sm:grid-cols-8 h-[calc(100vh-64px)]'>
 			<div className='block sm:sticky top-[64px] self-start col-span-3 p-5'>
@@ -79,7 +86,7 @@ export default async function Page({ params }: PokemonProps) {
 				<div className='flex flex-col relative min-w-[1px] max-w-full content-start item-stretch'>
 					<Sidebar data={data} />
 				</div>
-				<BottomButtons pokemon={data.name} gen={data.gen} />
+				<BottomButtons pokemon={data.name} gen={data.gen} id={id} />
 			</div>
 			<div className='p-5 col-span-5 overflow-auto sm:border-l border-gray-600'>
 				{reviews.length === 0 && (

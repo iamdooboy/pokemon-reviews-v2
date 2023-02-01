@@ -1,9 +1,10 @@
 import NextLink from 'next/link'
 
-export default function Page() {
+export default async function Page() {
 	return (
 		<div className='flex flex-col items-center'>
 			<h1>Hello, Next.js!</h1>
+
 			{Array(9)
 				.fill(1)
 				.map((_, i) => (

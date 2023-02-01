@@ -7,9 +7,10 @@ import { Form } from 'ui/review/form'
 interface Props {
 	pokemon: string
 	gen?: number
+	id: string
 }
 
-export const BottomButtons = ({ pokemon, gen }: Props) => {
+export const BottomButtons = ({ pokemon, gen, id }: Props) => {
 	const [showModal, setShowModal] = useState(false)
 	return (
 		<>
@@ -41,7 +42,7 @@ export const BottomButtons = ({ pokemon, gen }: Props) => {
 				</button>
 			</div>
 			<BackDrop visible={showModal} close={() => setShowModal(false)}>
-				<Form pokemon={pokemon} gen={gen} />
+				<Form pokemon={pokemon} gen={gen} id={id} />
 			</BackDrop>
 		</>
 	)

@@ -1,6 +1,7 @@
 'use client'
 import * as React from 'react'
 import { Pokemon } from 'types/typings'
+import { pb } from '@/lib/pocketbase'
 
 interface ContextProps {
 	pokemon: Pokemon[]
@@ -18,6 +19,13 @@ const GlobalContext = React.createContext<ContextProps>({
 
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
 	const [pokemon, setPokemon] = React.useState<[] | Pokemon[]>([])
+	const [user, setUser] = React.useState(null)
+	const [session, setSession] = React.useState(null)
+
+	// pb.authStore.onChange(au => {
+	// 	console.log('changed')
+	// })
+
 	return (
 		<GlobalContext.Provider value={{ pokemon, setPokemon }}>
 			{children}
