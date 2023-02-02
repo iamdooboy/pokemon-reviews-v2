@@ -2,6 +2,7 @@
 import { ChangeEvent, useState } from 'react'
 import { Rating } from '../rating'
 import { pb, currentUser } from '@/lib/pocketbase'
+import { useGlobalContext } from 'context/store'
 
 interface Props {
 	pokemon: string
@@ -28,6 +29,8 @@ export const Form = ({ pokemon, gen, id }: Props) => {
 	const onClickHandler = (value: number): void => {
 		setRating(value)
 	}
+
+	const { user } = useGlobalContext()
 
 	const createNewUser = async (newUserData: any) => {
 		const res = await pb.collection('users').create(newUserData)
@@ -100,8 +103,9 @@ export const Form = ({ pokemon, gen, id }: Props) => {
 						<input
 							onChange={e => setName(e.target.value)}
 							type='text'
-							className='rounded-lg flex-1 border border-slate-500 w-full py-2 px-4 bg-gray-700 text-slate-400 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent'
+							className='rounded-lg flex-1 border border-slate-500 w-full py-2 px-4 bg-gray-700 text-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent'
 							placeholder='Name'
+							value={user.username}
 						/>
 					</div>
 					<div className='col-span-2'>

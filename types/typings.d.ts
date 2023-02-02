@@ -32,3 +32,8 @@ export interface Records {
 	created: string
 	gen: number
 }
+
+export interface User {
+	id: string | undefined
+	username: string | undefined
+}
