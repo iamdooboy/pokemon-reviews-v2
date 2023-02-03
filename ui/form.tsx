@@ -1,13 +1,16 @@
 'use client'
 import { ChangeEvent, useState } from 'react'
-import { Rating } from '../rating'
+import { Rating } from './rating'
 import { pb, currentUser } from '@/lib/pocketbase'
 import { useGlobalContext } from 'context/store'
+import { Records } from 'types/typings'
+import { mutate } from 'swr'
 
 interface Props {
 	pokemon: string
 	gen?: number
 	id: string
+	close: () => void
 }
 
 interface User {
@@ -19,18 +22,17 @@ interface User {
 const CHAR_SET =
 	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-export const Form = ({ pokemon, gen, id }: Props) => {
+export const Form = ({ pokemon, gen, id, close }: Props) => {
 	const [name, setName] = useState('')
 	const [rating, setRating] = useState(0)
 	const [text, setText] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [password, setPassword] = useState('')
+	const { user } = useGlobalContext()
 
 	const onClickHandler = (value: number): void => {
 		setRating(value)
 	}
-
-	const { user } = useGlobalContext()
 
 	const createNewUser = async (newUserData: any) => {
 		const res = await pb.collection('users').create(newUserData)
@@ -80,10 +82,20 @@ export const Form = ({ pokemon, gen, id }: Props) => {
 		}
 		try {
 			await pb.collection('reviews').create(data)
+
+			mutate(() =>
+				pb.collection('reviews').getList<Records>(1, 30, {
+					filter: `pokedex.pokemon='${pokemon}'`,
+					expand: 'user',
+					$autoCancel: false
+				})
+			)
 		} catch (error) {
 			console.log(error)
 		}
+
 		setLoading(false)
+		close()
 	}
 
 	if (loading) return <div>loading</div>

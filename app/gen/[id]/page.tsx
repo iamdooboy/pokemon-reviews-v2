@@ -1,4 +1,4 @@
-import { Grid } from '@/ui/grid'
+import { Grid } from '@/ui/gen-page/grid'
 import { Pokemon } from 'types/typings'
 //import { TestGrid } from 'ui/test-grid'
 
@@ -22,5 +22,11 @@ interface GenProps {
 export default async function Page({ params }: GenProps) {
 	const pokemon = await getGen(params.id)
 
-	return <Grid pokemon={pokemon} />
+	return (
+		<div className='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+			<div className='grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 xl:gap-x-8'>
+				<Grid pokemon={pokemon} />
+			</div>
+		</div>
+	)
 }

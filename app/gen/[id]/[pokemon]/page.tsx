@@ -1,8 +1,10 @@
-import { Review } from 'ui/review'
-import { Sidebar } from 'ui/sidebar'
-import { BottomButtons } from 'ui/review/bottom-buttons'
 import { pb } from '@/lib/pocketbase'
-import { Pokemon, Records } from 'types/typings'
+import { Pokemon } from 'types/typings'
+import { ListReviews } from '@/ui/review-section/list-reviews'
+import { ClientWrapper } from '@/ui/client-wrapper'
+import { TopSection } from '@/ui/pokemon-page/top-section'
+import { Card } from '@/ui/pokemon-page/card'
+import { BottomSection } from '@/ui/pokemon-page/bottom-section'
 
 interface PokemonProps {
 	params: {
@@ -36,74 +38,32 @@ const getPokemon = async (pokemon: string) => {
 		return data
 	}
 }
-const getReviews = async (pokemon: string): Promise<Records[]> => {
-	try {
-		const records = await pb.collection('reviews').getList<Records>(1, 30, {
-			filter: `pokedex.pokemon='${pokemon}'`,
-			expand: 'user',
-			$autoCancel: false
-		})
-		return records.items
-	} catch (error) {
-		console.log(error)
-		return []
-	}
-}
+
 const getPokemonFromDb = async (pokemon: string) => {
 	const res = await pb.collection('pokedex').getList(1, 1, {
 		filter: `pokemon='${pokemon}'`
 	})
-	return res.items[0].id
+	return res.items[0]
 }
 
 export default async function Page({ params }: PokemonProps) {
 	const data = await getPokemon(params.pokemon)
-	const reviews = await getReviews(params.pokemon)
-	const id = await getPokemonFromDb(params.pokemon)
+	const review = await getPokemonFromDb(params.pokemon)
+
 	return (
 		<div className='sm:grid sm:grid-cols-8 h-[calc(100vh-64px)]'>
 			<div className='block sm:sticky top-[64px] self-start col-span-3 p-5'>
-				<div className='flex items-stretch justify-between mb-4'>
-					<a
-						href='#'
-						className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
-					>
-						Prev
-					</a>
-					<a
-						href='#'
-						className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
-					>
-						Surprise Me
-					</a>
-					<a
-						href='#'
-						className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
-					>
-						Next
-					</a>
-				</div>
+				<TopSection />
 				<div className='flex flex-col relative min-w-[1px] max-w-full content-start item-stretch'>
-					<Sidebar data={data} />
+					<Card data={data} rating={review.rating} />
 				</div>
-				<BottomButtons pokemon={data.name} gen={data.gen} id={id} />
+				<ClientWrapper>
+					<BottomSection pokemon={data.name} gen={data.gen} id={review.id} />
+				</ClientWrapper>
 			</div>
-			<div className='p-5 col-span-5 overflow-auto sm:border-l border-gray-600'>
-				{reviews.length === 0 && (
-					<div className='text-gray-400 bg-gray-700 font-bold border border-gray-600 flex justify-center rounded-lg py-10'>
-						There are no reviews
-					</div>
-				)}
-				{reviews.map(review => (
-					<Review
-						key={review.id}
-						username={review.expand.user.username}
-						date={review.created}
-						rating={review.rating}
-						text={review.text}
-					/>
-				))}
-			</div>
+			<ClientWrapper className='p-5 col-span-5 overflow-auto sm:border-l border-gray-600'>
+				<ListReviews pokemon={params.pokemon} />
+			</ClientWrapper>
 		</div>
 	)
 }

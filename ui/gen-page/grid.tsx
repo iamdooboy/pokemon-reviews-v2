@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-import { BlurImage } from './blur-image'
+import { GridItem } from './grid-item'
 import { Pokemon } from 'types/typings'
 
 interface PokemonArray {
@@ -35,29 +35,27 @@ export const Grid = ({ pokemon }: PokemonArray) => {
 	)
 
 	return (
-		<div className='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-			<div className='grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 xl:gap-x-8'>
-				{items.slice(0, visible).map((item, i) => {
-					if (visible === i + 1)
-						return (
-							<BlurImage
-								ref={lastPostRef}
-								key={item.id}
-								name={item.name}
-								image={item.image}
-								id={item.id}
-							/>
-						)
+		<>
+			{items.slice(0, visible).map((item, i) => {
+				if (visible === i + 1)
 					return (
-						<BlurImage
+						<GridItem
+							ref={lastPostRef}
 							key={item.id}
 							name={item.name}
 							image={item.image}
 							id={item.id}
 						/>
 					)
-				})}
-			</div>
-		</div>
+				return (
+					<GridItem
+						key={item.id}
+						name={item.name}
+						image={item.image}
+						id={item.id}
+					/>
+				)
+			})}
+		</>
 	)
 }
