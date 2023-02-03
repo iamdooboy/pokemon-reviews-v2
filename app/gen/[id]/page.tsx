@@ -1,6 +1,5 @@
 import { Grid } from '@/ui/gen-page/grid'
 import { Pokemon } from 'types/typings'
-//import { TestGrid } from 'ui/test-grid'
 
 async function getGen(id: string): Promise<Pokemon[]> {
 	try {

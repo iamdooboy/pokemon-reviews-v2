@@ -5,24 +5,86 @@ interface ReviewProps {
 	text: string
 }
 
+export const timeOffset = (time: string) => {
+	const createdAt = new Date(time)
+	const now = new Date()
+	const offset = now.getTime() - createdAt.getTime()
+	const minutes = Math.floor(offset / 1000 / 60)
+
+	if (minutes < 1) {
+		return 'a moment ago'
+	}
+
+	if (minutes === 1) {
+		return 'a minute ago'
+	}
+
+	if (minutes < 60) {
+		return `${minutes} minutes ago`
+	}
+
+	const hours = Math.floor(minutes / 60)
+
+	if (hours === 1) {
+		return 'an hour ago'
+	}
+
+	if (hours < 24) {
+		return `${hours} hours ago`
+	}
+
+	const days = Math.floor(hours / 24)
+
+	const numOfDaysInMonth = new Date(
+		now.getFullYear(),
+		now.getMonth(),
+		0
+	).getDate()
+
+	if (days === 1) {
+		return 'a day ago'
+	}
+
+	if (days < numOfDaysInMonth) {
+		return `${days} days ago`
+	}
+
+	const months = days / numOfDaysInMonth
+
+	if (months === 1) {
+		return 'a month ago'
+	}
+
+	if (months < 12) {
+		return `${months} months ago`
+	}
+
+	const years = months / 12
+
+	if (years === 1) {
+		return 'a year ago'
+	}
+
+	return `${years} year ago`
+}
+
 export const Review = ({ username, date, rating, text }: ReviewProps) => {
+	const diff = timeOffset(date)
 	return (
-		<article>
-			<div className='flex mb-4 space-x-4'>
+		<article className='border border-gray-700 rounded-lg p-4'>
+			<div className='flex mb-2 space-x-4 items-center'>
 				<img
 					className='w-10 h-10 rounded-full'
 					src={`https://avatars.dicebear.com/api/identicon/${username}.svg`}
 					alt=''
 				/>
-				<div className='space-y-1 font-medium dark:text-white'>
-					<p>
-						{username}
-						<time className='block text-sm text-gray-500 dark:text-gray-400'>
-							Posted on {date}
-						</time>
-					</p>
+				<div className='flex flex-col font-medium text-white justify-between'>
+					<text>{username}</text>
+					<text className='text-gray-500 text-sm'>{diff}</text>
 				</div>
 			</div>
+
+			<p className='mb-2 font-light text-gray-500 dark:text-gray-400'>{text}</p>
 			<div className='flex items-center mb-1'>
 				{Array(rating)
 					.fill(1)
@@ -40,7 +102,6 @@ export const Review = ({ username, date, rating, text }: ReviewProps) => {
 						</svg>
 					))}
 			</div>
-			<p className='mb-2 font-light text-gray-500 dark:text-gray-400'>{text}</p>
 		</article>
 	)
 }
