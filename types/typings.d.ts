@@ -8,7 +8,15 @@ export interface Pokemon {
 	image: string
 	default?: string
 	jpn?: string
-	gen?: number
+	gen: number
+	prev: Nav
+	next: Nav
+}
+
+export interface Nav {
+	name: string
+	id: string
+	gen: number
 }
 
 export interface Variations {
