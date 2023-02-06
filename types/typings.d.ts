@@ -13,6 +13,13 @@ export interface Pokemon {
 	next: Nav
 }
 
+export interface Gen {
+	id: string
+	name: string
+	image: string
+	image: string
+}
+
 export interface Nav {
 	name: string
 	id: string

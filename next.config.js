@@ -7,7 +7,8 @@ const nextConfig = {
 	},
 	experimental: {
 		// Required:
-		appDir: true
+		appDir: true,
+		enableUndici: true
 	}
 }
 

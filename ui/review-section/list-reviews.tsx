@@ -17,7 +17,7 @@ export const ListReviews = ({ pokemon }: ListReviewsProps) => {
 			$autoCancel: false
 		})
 
-	const { data, isLoading } = useSWR('/pokedex', fetcher, {
+	const { data, isLoading } = useSWR(`/${pokemon}`, fetcher, {
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false
 	})

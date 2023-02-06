@@ -79,8 +79,8 @@ export const Review = ({ username, date, rating, text }: ReviewProps) => {
 					alt=''
 				/>
 				<div className='flex flex-col font-medium text-white justify-between'>
-					<text>{username}</text>
-					<text className='text-gray-500 text-sm'>{diff}</text>
+					<div>{username}</div>
+					<div className='text-gray-500 text-sm'>{diff}</div>
 				</div>
 			</div>
 

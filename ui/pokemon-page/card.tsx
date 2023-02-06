@@ -1,4 +1,3 @@
-import { Rating } from '../rating'
 import { Pokemon } from 'types/typings'
 
 interface Props {
@@ -78,9 +77,11 @@ export const Card = ({ data, rating }: Props) => {
 		<div className='flex flex-col items-stretch justify-start grid-gap'>
 			<div
 				className={`rounded-lg p-[3px] bg-gradient-to-br ${
-					fromDefault[data.types![0]]
+					fromDefault[data?.types![0]]
 				} ${
-					data.types![1] ? toDefault[data.types![1]] : toLight[data.types![0]]
+					data?.types![1]
+						? toDefault[data?.types![1]]
+						: toLight[data?.types![0]]
 				}`}
 			>
 				<div
@@ -90,23 +91,23 @@ export const Card = ({ data, rating }: Props) => {
 					<div>
 						<div className='p-2 bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-2 border-gray-500'>
 							<div className='fixed text-5xl lg:text-5xl md:text-3xl font-bold opacity-25 text-white'>
-								{data.jpn}
+								{data?.jpn}
 							</div>
-							<img src={data.image} alt={data.name} />
+							<img src={data?.image} alt={data?.name} />
 						</div>
 
 						<div className='flex items-center justify-between'>
 							<span className='text-4xl sm:text-2xl lg:text-4xl md:text-3xl font-bold text-white'>
-								{data.name}
+								{data?.name}
 							</span>
 							<span className='text-xl sm:text-md font-sans text-gray-400'>
-								&#35;{data.id}
+								&#35;{data?.id}
 							</span>
 						</div>
 						<div className='flex items-center justify-between'>
 							<div className='flex flex-col gap-2'>
 								<div className='flex gap-2'>
-									{data.types!.map((type: string | undefined) => (
+									{data?.types!.map((type: string | undefined) => (
 										<img
 											key={type}
 											className='w-12 sm:w-10 lg:w-12'
@@ -135,7 +136,7 @@ export const Card = ({ data, rating }: Props) => {
 							</div>
 							<div>
 								<span className='text-7xl lg:text-7xl sm:text-5xl font-extrabold text-gray-900 dark:text-white'>
-									3.7
+									{rating?.toFixed(1)}
 								</span>
 							</div>
 						</div>
