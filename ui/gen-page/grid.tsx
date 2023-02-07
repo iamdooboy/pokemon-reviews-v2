@@ -42,17 +42,19 @@ export const Grid = ({ pokemon }: PokemonArray) => {
 						<GridItem
 							ref={lastPostRef}
 							key={item.id}
-							name={item.name}
+							name={item.formatted_name}
 							image={item.image}
 							id={item.id}
+							link={item.name}
 						/>
 					)
 				return (
 					<GridItem
 						key={item.id}
-						name={item.name}
+						name={item.formatted_name}
 						image={item.image}
 						id={item.id}
+						link={item.name}
 					/>
 				)
 			})}

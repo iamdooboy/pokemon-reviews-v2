@@ -1,4 +1,5 @@
 import { Pokemon } from 'types/typings'
+import { BlurredImage } from '../blurred-image'
 
 interface Props {
 	data: Pokemon
@@ -84,21 +85,20 @@ export const Card = ({ data, rating }: Props) => {
 						: toLight[data?.types![0]]
 				}`}
 			>
-				<div
-					className='h-full w-full bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 p-4
-'
-				>
+				<div className='h-full w-full bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 p-4'>
 					<div>
 						<div className='p-2 bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-2 border-gray-500'>
-							<div className='fixed text-5xl lg:text-5xl md:text-3xl font-bold opacity-25 text-white'>
+							<div className='fixed text-5xl lg:text-5xl md:text-3xl font-bold opacity-30 text-white z-30'>
 								{data?.jpn}
 							</div>
-							<img src={data?.image} alt={data?.name} />
+							<div className='p-3'>
+								<BlurredImage src={data?.image} alt={data?.name} />
+							</div>
 						</div>
 
 						<div className='flex items-center justify-between'>
 							<span className='text-4xl sm:text-2xl lg:text-4xl md:text-3xl font-bold text-white'>
-								{data?.name}
+								{data?.formatted_name}
 							</span>
 							<span className='text-xl sm:text-md font-sans text-gray-400'>
 								&#35;{data?.id}

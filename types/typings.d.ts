@@ -11,13 +11,14 @@ export interface Pokemon {
 	gen: number
 	prev: Nav
 	next: Nav
+	formatted_name: string
 }
 
 export interface Gen {
 	id: string
 	name: string
 	image: string
-	image: string
+	link: string
 }
 
 export interface Nav {
