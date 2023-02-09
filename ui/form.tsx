@@ -71,6 +71,7 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 			}
 			const data = await createNewUser(newUserData)
 			const auth = await authUser(data.username, pw)
+			document.cookie = `pb_auth=${data}`
 			userId = auth.record.id
 		}
 
