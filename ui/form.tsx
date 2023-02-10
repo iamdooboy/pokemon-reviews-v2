@@ -14,7 +14,7 @@ interface Props {
 }
 
 interface User {
-	username: string
+	name: string
 	password: string
 	passwordConfirm: string
 }
@@ -66,7 +66,7 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 		if (!currentUser) {
 			const pw = generatePassword()
 			const newUserData: User = {
-				username: name,
+				name,
 				password: pw,
 				passwordConfirm: pw
 			}
@@ -113,7 +113,7 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 							type='text'
 							className='rounded-lg flex-1 border border-slate-500 w-full py-2 px-4 bg-gray-700 text-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent'
 							placeholder='Name'
-							value={user.username}
+							value={user.name}
 						/>
 					</div>
 					<div className='col-span-2'>

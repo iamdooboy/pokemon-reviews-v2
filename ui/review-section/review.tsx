@@ -1,14 +1,17 @@
 import { pb } from '@/lib/pocketbase'
+import { Records } from 'types/typings'
 
 interface ReviewProps {
-	username: string
-	date: string
-	rating: number
-	text: string
-	user: string
+	data: Records
 }
 
-export const timeOffset = (time: string) => {
+interface Props {
+	likes: number
+	dislikes: number
+	children: React.ReactNode
+}
+
+const timeOffset = (time: string) => {
 	const createdAt = new Date(time)
 	const now = new Date()
 	const offset = now.getTime() - createdAt.getTime()
@@ -71,42 +74,107 @@ export const timeOffset = (time: string) => {
 	return `${years} year ago`
 }
 
-export const Review = ({ username, date, rating, text, user }: ReviewProps) => {
-	const auth = user === pb.authStore.model?.id
-	const diff = timeOffset(date)
+export const Reaction = ({ likes, dislikes, children }: Props) => {
 	return (
-		<article className='border border-gray-700 rounded-lg p-4'>
+		<div className='flex gap-4 items-center'>
+			<div className='flex items-center text-gray-400 gap-1'>
+				<svg
+					className='hover:fill-slate-400 fill-none stroke-2 stroke-slate-400'
+					xmlns='http://www.w3.org/2000/svg'
+					width='16'
+					height='16'
+					viewBox='0 0 24 24'
+				>
+					<path d='M7 10v12'></path>
+					<path d='M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z'></path>
+				</svg>
+				{likes > 0 && likes}
+			</div>
+
+			<div className='flex items-center text-gray-400 gap-1'>
+				<svg
+					className='hover:fill-slate-400 fill-none stroke-2 stroke-slate-400'
+					xmlns='http://www.w3.org/2000/svg'
+					width='16'
+					height='16'
+					viewBox='0 0 24 24'
+				>
+					<path d='M17 14V2'></path>
+					<path d='M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z'></path>
+				</svg>
+				{dislikes > 0 && dislikes}
+			</div>
+
+			{children}
+		</div>
+	)
+}
+
+const Ellipsis = () => {
+	return (
+		<svg
+			className='black fill-none stroke-2 stroke-slate-400'
+			xmlns='http://www.w3.org/2000/svg'
+			width='16'
+			height='16'
+			viewBox='0 0 24 24'
+		>
+			<circle cx='12' cy='12' r='1'></circle>
+			<circle cx='19' cy='12' r='1'></circle>
+			<circle cx='5' cy='12' r='1'></circle>
+		</svg>
+	)
+}
+
+export const Review = ({ data }: ReviewProps) => {
+	const auth = data.user === pb.authStore.model?.id
+	const diff = timeOffset(data.created)
+	return (
+		<article className='border border-gray-700 rounded-lg p-4 space-y-3'>
 			<div className='flex mb-2 space-x-4 items-center'>
 				<img
 					className='w-10 h-10 rounded-full'
-					src={`https://avatars.dicebear.com/api/adventurer-neutral/${username}.svg`}
+					src={`https://avatars.dicebear.com/api/adventurer-neutral/${data.expand.user.username}.svg`}
 					alt=''
 				/>
 				<div className='flex flex-col font-medium text-white justify-between'>
-					<div>{username}</div>
+					<div>{data.expand.user.name}</div>
 					<div className='text-gray-500 text-sm'>{diff}</div>
 				</div>
 			</div>
 
-			<p className='mb-2 font-light text-gray-500 dark:text-gray-400'>{text}</p>
-			<div className='flex items-center mb-1'>
-				{Array(rating)
+			<p className='font-light text-gray-500 dark:text-gray-400'>{data.text}</p>
+			<div className='flex items-center gap-2'>
+				{Array(data.rating)
 					.fill(1)
-					.map((_, i) => (
+					.map(_ => (
 						<svg
-							key={i}
-							aria-hidden='true'
-							className='w-5 h-5 text-yellow-400'
-							fill='currentColor'
-							viewBox='0 0 20 20'
+							className='fill-yellow-500 stroke-2 stroke-yellow-500'
 							xmlns='http://www.w3.org/2000/svg'
+							width='17'
+							height='17'
+							viewBox='0 0 24 24'
 						>
-							<title>First star</title>
-							<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
+							<polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
+						</svg>
+					))}
+				{Array(5 - data.rating)
+					.fill(1)
+					.map(_ => (
+						<svg
+							className='fill-gray-500 stroke-2 stroke-gray-500'
+							xmlns='http://www.w3.org/2000/svg'
+							width='17'
+							height='17'
+							viewBox='0 0 24 24'
+						>
+							<polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
 						</svg>
 					))}
 			</div>
-			{auth && <button>edit</button>}
+			<Reaction likes={data.likes.length} dislikes={data.dislikes.length}>
+				{auth && <Ellipsis />}
+			</Reaction>
 		</article>
 	)
 }

@@ -33,14 +33,7 @@ export const ListReviews = ({ pokemon }: ListReviewsProps) => {
 			)}
 			<div className='flex flex-col gap-4'>
 				{data?.items.map(rev => (
-					<Review
-						key={rev.id}
-						username={rev.expand.user.username}
-						date={rev.created}
-						rating={rev.rating}
-						text={rev.text}
-						user={rev.user}
-					/>
+					<Review key={rev.id} data={rev} />
 				))}
 			</div>
 		</>

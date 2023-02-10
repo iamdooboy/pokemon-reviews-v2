@@ -38,6 +38,7 @@ export interface Records {
 	text: string
 	expand: {
 		user: {
+			name: string
 			username: string
 		}
 	}
@@ -48,9 +49,12 @@ export interface Records {
 	created: string
 	gen: number
 	user: string
+	likes: string[]
+	dislikes: string[]
 }
 
 export interface User {
 	id: string | undefined
 	username: string | undefined
+	name: string | undefined
 }

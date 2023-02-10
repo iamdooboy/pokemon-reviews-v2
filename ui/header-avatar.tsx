@@ -3,24 +3,34 @@
 import { useState, useRef } from 'react'
 import { pb } from '@/lib/pocketbase'
 import { useClick } from 'hooks/useClick'
+import { useRouter } from 'next/navigation'
 
 interface Props {
 	isOpen: boolean
 	toggle: () => void
 	username: string
 	close: () => void
+	name: string
 }
 
-const MenuDropDown = ({ isOpen, toggle, username, close }: Props) => {
+const MenuDropDown = ({ isOpen, toggle, username, close, name }: Props) => {
 	const ref = useRef<HTMLDivElement>(null)
+	const router = useRouter()
+
 	useClick(ref, () => {
 		close()
 	})
+
+	const signOut = () => {
+		pb.authStore.clear()
+		close()
+		router.refresh()
+	}
 	return (
 		<div className='relative inline-block text-left'>
 			<div className='flex items-center cursor-pointer' onClick={toggle}>
 				<img
-					src={`https://avatars.dicebear.com/api/identicon/${username}.svg`}
+					src={`https://avatars.dicebear.com/api/adventurer-neutral/${username}.svg`}
 					className='rounded-full w-10 hidden sm:inline'
 					alt='Avatar'
 				/>
@@ -41,46 +51,31 @@ const MenuDropDown = ({ isOpen, toggle, username, close }: Props) => {
 			{isOpen && (
 				<div
 					ref={ref}
-					className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+					className='absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-slate-600 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none divide-y divide-gray-500 text-white'
 					role='menu'
 					aria-orientation='vertical'
 					aria-labelledby='menu-button'
 				>
 					<div className='py-1' role='none'>
-						<a
-							href='#'
-							className='text-gray-700 block px-4 py-2 text-sm'
+						<div
+							className='text-gray-400 inline-block px-4 py-2 text-sm'
 							role='menuitem'
 							id='menu-item-0'
 						>
-							Account settings
-						</a>
-						<a
-							href='#'
-							className='text-gray-700 block px-4 py-2 text-sm'
+							Signed in as
+							<div className='font-semibold text-white'>{name}</div>
+						</div>
+					</div>
+					<div className='py-1' role='none'>
+						<button
+							type='button'
+							className='block w-full px-4 py-2 text-left text-sm'
 							role='menuitem'
-							id='menu-item-1'
+							id='menu-item-3'
+							onClick={signOut}
 						>
-							Support
-						</a>
-						<a
-							href='#'
-							className='text-gray-700 block px-4 py-2 text-sm'
-							role='menuitem'
-							id='menu-item-2'
-						>
-							License
-						</a>
-						<form method='POST' action='#' role='none'>
-							<button
-								type='submit'
-								className='text-gray-700 block w-full px-4 py-2 text-left text-sm'
-								role='menuitem'
-								id='menu-item-3'
-							>
-								Sign out
-							</button>
-						</form>
+							Sign out
+						</button>
 					</div>
 				</div>
 			)}
@@ -93,15 +88,14 @@ export const HeaderAvatar = () => {
 	const user = pb.authStore.model
 	return (
 		<>
-			{user ? (
+			{user && (
 				<MenuDropDown
 					isOpen={open}
 					toggle={() => setOpen(!open)}
 					username={user.username}
+					name={user.name}
 					close={() => setOpen(false)}
 				/>
-			) : (
-				<button>log in</button>
 			)}
 		</>
 	)
