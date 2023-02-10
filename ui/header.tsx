@@ -1,5 +1,10 @@
 import { SearchButton } from './search-button'
-import { HeaderAvatar } from './header-avatar'
+import dynamic from 'next/dynamic'
+
+const HeaderMenu = dynamic(
+	() => import('./header-avatar').then(mod => mod.HeaderAvatar),
+	{ ssr: false }
+)
 
 export const Header = () => {
 	return (
@@ -32,12 +37,7 @@ export const Header = () => {
 						<span className='box-border'>
 							<div className='flex items-stretch content-start flex-1'>
 								<SearchButton />
-								<HeaderAvatar />
-								{/* <img
-									src='https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
-									className='rounded-full w-10 hidden sm:inline'
-									alt='Avatar'
-								/> */}
+								<HeaderMenu />
 							</div>
 						</span>
 					</div>

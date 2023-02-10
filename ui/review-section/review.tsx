@@ -1,8 +1,11 @@
+import { pb } from '@/lib/pocketbase'
+
 interface ReviewProps {
 	username: string
 	date: string
 	rating: number
 	text: string
+	user: string
 }
 
 export const timeOffset = (time: string) => {
@@ -68,14 +71,15 @@ export const timeOffset = (time: string) => {
 	return `${years} year ago`
 }
 
-export const Review = ({ username, date, rating, text }: ReviewProps) => {
+export const Review = ({ username, date, rating, text, user }: ReviewProps) => {
+	const auth = user === pb.authStore.model?.id
 	const diff = timeOffset(date)
 	return (
 		<article className='border border-gray-700 rounded-lg p-4'>
 			<div className='flex mb-2 space-x-4 items-center'>
 				<img
 					className='w-10 h-10 rounded-full'
-					src={`https://avatars.dicebear.com/api/identicon/${username}.svg`}
+					src={`https://avatars.dicebear.com/api/adventurer-neutral/${username}.svg`}
 					alt=''
 				/>
 				<div className='flex flex-col font-medium text-white justify-between'>
@@ -102,6 +106,7 @@ export const Review = ({ username, date, rating, text }: ReviewProps) => {
 						</svg>
 					))}
 			</div>
+			{auth && <button>edit</button>}
 		</article>
 	)
 }

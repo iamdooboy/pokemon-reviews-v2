@@ -39,6 +39,7 @@ export const ListReviews = ({ pokemon }: ListReviewsProps) => {
 						date={rev.created}
 						rating={rev.rating}
 						text={rev.text}
+						user={rev.user}
 					/>
 				))}
 			</div>

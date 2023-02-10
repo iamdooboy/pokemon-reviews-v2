@@ -20,13 +20,13 @@ import PocketBase from 'pocketbase'
 
 const pb = new PocketBase(process.env.NEXT_PUBLIC_DB_URL)
 
-if (typeof document !== 'undefined') {
-	pb.authStore.loadFromCookie(document.cookie)
+// if (typeof document !== 'undefined') {
+// 	pb.authStore.loadFromCookie(document.cookie)
 
-	pb.authStore.onChange(() => {
-		document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
-	})
-}
+// 	pb.authStore.onChange(() => {
+// 		document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
+// 	})
+// }
 
 export const currentUser = pb.authStore.model
 

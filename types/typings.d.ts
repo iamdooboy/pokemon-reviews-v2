@@ -47,6 +47,7 @@ export interface Records {
 	}
 	created: string
 	gen: number
+	user: string
 }
 
 export interface User {

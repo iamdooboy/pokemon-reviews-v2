@@ -1,7 +1,7 @@
 'use client'
 import { ChangeEvent, useState } from 'react'
 import { Rating } from './rating'
-import { pb, currentUser } from '@/lib/pocketbase'
+import { pb } from '@/lib/pocketbase'
 import { useGlobalContext } from 'context/store'
 import { mutate } from 'swr'
 import { useRouter } from 'next/navigation'
@@ -60,6 +60,7 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 	const submitHandler = async (e: React.FormEvent) => {
 		setLoading(true)
 		e.preventDefault()
+		const currentUser = pb.authStore.model
 		let userId = currentUser?.id
 
 		if (!currentUser) {
@@ -71,7 +72,6 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 			}
 			const data = await createNewUser(newUserData)
 			const auth = await authUser(data.username, pw)
-			document.cookie = `pb_auth=${data}`
 			userId = auth.record.id
 		}
 
