@@ -41,11 +41,7 @@ const MenuDropDown = ({ isOpen, toggle, username, close, name }: Props) => {
 					fill='currentColor'
 					aria-hidden='true'
 				>
-					<path
-						fill-rule='evenodd'
-						d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'
-						clip-rule='evenodd'
-					/>
+					<path d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' />
 				</svg>
 			</div>
 			{isOpen && (
@@ -66,7 +62,7 @@ const MenuDropDown = ({ isOpen, toggle, username, close, name }: Props) => {
 							<div className='font-semibold text-white'>{name}</div>
 						</div>
 					</div>
-					<div className='py-1' role='none'>
+					<div className='py-1 hover:bg-gray-500 rounded-b-lg' role='none'>
 						<button
 							type='button'
 							className='block w-full px-4 py-2 text-left text-sm'

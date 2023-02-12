@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import { pb } from '@/lib/pocketbase'
 import { Records } from 'types/typings'
 import { Review } from './review'
+import { Reaction } from './reaction'
 
 interface ListReviewsProps {
 	pokemon: string
@@ -32,10 +33,31 @@ export const ListReviews = ({ pokemon }: ListReviewsProps) => {
 				</div>
 			)}
 			<div className='flex flex-col gap-4'>
-				{data?.items.map(rev => (
-					<Review key={rev.id} data={rev} />
-				))}
+				{data?.items.map(record => {
+					const auth = record.user === pb.authStore.model?.id
+					return (
+						<Review key={record.id} data={record}>
+							<Reaction record={record}>{auth && <Ellipsis />}</Reaction>
+						</Review>
+					)
+				})}
 			</div>
 		</>
+	)
+}
+
+const Ellipsis = () => {
+	return (
+		<svg
+			className='black fill-none stroke-2 stroke-slate-400'
+			xmlns='http://www.w3.org/2000/svg'
+			width='16'
+			height='16'
+			viewBox='0 0 24 24'
+		>
+			<circle cx='12' cy='12' r='1'></circle>
+			<circle cx='19' cy='12' r='1'></circle>
+			<circle cx='5' cy='12' r='1'></circle>
+		</svg>
 	)
 }

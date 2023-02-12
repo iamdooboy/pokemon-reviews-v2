@@ -1,13 +1,9 @@
-import { pb } from '@/lib/pocketbase'
+'use client'
+
 import { Records } from 'types/typings'
 
 interface ReviewProps {
 	data: Records
-}
-
-interface Props {
-	likes: number
-	dislikes: number
 	children: React.ReactNode
 }
 
@@ -74,60 +70,7 @@ const timeOffset = (time: string) => {
 	return `${years} year ago`
 }
 
-export const Reaction = ({ likes, dislikes, children }: Props) => {
-	return (
-		<div className='flex gap-4 items-center'>
-			<div className='flex items-center text-gray-400 gap-1'>
-				<svg
-					className='hover:fill-slate-400 fill-none stroke-2 stroke-slate-400'
-					xmlns='http://www.w3.org/2000/svg'
-					width='16'
-					height='16'
-					viewBox='0 0 24 24'
-				>
-					<path d='M7 10v12'></path>
-					<path d='M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z'></path>
-				</svg>
-				{likes > 0 && likes}
-			</div>
-
-			<div className='flex items-center text-gray-400 gap-1'>
-				<svg
-					className='hover:fill-slate-400 fill-none stroke-2 stroke-slate-400'
-					xmlns='http://www.w3.org/2000/svg'
-					width='16'
-					height='16'
-					viewBox='0 0 24 24'
-				>
-					<path d='M17 14V2'></path>
-					<path d='M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z'></path>
-				</svg>
-				{dislikes > 0 && dislikes}
-			</div>
-
-			{children}
-		</div>
-	)
-}
-
-const Ellipsis = () => {
-	return (
-		<svg
-			className='black fill-none stroke-2 stroke-slate-400'
-			xmlns='http://www.w3.org/2000/svg'
-			width='16'
-			height='16'
-			viewBox='0 0 24 24'
-		>
-			<circle cx='12' cy='12' r='1'></circle>
-			<circle cx='19' cy='12' r='1'></circle>
-			<circle cx='5' cy='12' r='1'></circle>
-		</svg>
-	)
-}
-
-export const Review = ({ data }: ReviewProps) => {
-	const auth = data.user === pb.authStore.model?.id
+export const Review = ({ data, children }: ReviewProps) => {
 	const diff = timeOffset(data.created)
 	return (
 		<article className='border border-gray-700 rounded-lg p-4 space-y-3'>
@@ -147,8 +90,9 @@ export const Review = ({ data }: ReviewProps) => {
 			<div className='flex items-center gap-2'>
 				{Array(data.rating)
 					.fill(1)
-					.map(_ => (
+					.map((_, i) => (
 						<svg
+							key={i}
 							className='fill-yellow-500 stroke-2 stroke-yellow-500'
 							xmlns='http://www.w3.org/2000/svg'
 							width='17'
@@ -160,8 +104,9 @@ export const Review = ({ data }: ReviewProps) => {
 					))}
 				{Array(5 - data.rating)
 					.fill(1)
-					.map(_ => (
+					.map((_, i) => (
 						<svg
+							key={i}
 							className='fill-gray-500 stroke-2 stroke-gray-500'
 							xmlns='http://www.w3.org/2000/svg'
 							width='17'
@@ -172,9 +117,7 @@ export const Review = ({ data }: ReviewProps) => {
 						</svg>
 					))}
 			</div>
-			<Reaction likes={data.likes.length} dislikes={data.dislikes.length}>
-				{auth && <Ellipsis />}
-			</Reaction>
+			{children}
 		</article>
 	)
 }

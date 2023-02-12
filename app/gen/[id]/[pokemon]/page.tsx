@@ -25,6 +25,9 @@ const getRandomPokemon = async () => {
 		const res = await fetch(
 			`https://funny-elk-apron.cyclic.app/api/pokemon/${random}`
 		)
+		if (!res.ok) {
+			return {}
+		}
 		const data = await res.json()
 		return data
 	} catch (error) {
@@ -42,6 +45,9 @@ const getPokemon = async (pokemon: string) => {
 			`https://funny-elk-apron.cyclic.app/api/pokemon/${pokemon}`
 		)
 		const data = await res.json()
+		if (!res.ok) {
+			return {}
+		}
 		return data
 	} catch (error) {
 		console.log(error)
