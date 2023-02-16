@@ -68,8 +68,9 @@ export const Reaction = ({ record, children }: ReactionProps) => {
 			dislikes: tempDislikes
 		}
 
-		const updatedRecord = await pb.collection('reviews').update(record.id, data)
-		console.log(updatedRecord)
+		await pb.collection('reviews').update(record.id, data, {
+			$autoCancel: false
+		})
 	}
 
 	const onDislike = async () => {
@@ -102,8 +103,9 @@ export const Reaction = ({ record, children }: ReactionProps) => {
 			dislikes: tempDislikes
 		}
 
-		const updatedRecord = await pb.collection('reviews').update(record.id, data)
-		console.log(updatedRecord)
+		await pb.collection('reviews').update(record.id, data, {
+			$autoCancel: false
+		})
 	}
 
 	return (
