@@ -101,21 +101,49 @@ export default async function Page({ params }: PokemonProps) {
 	])
 
 	return (
-		<div className='sm:grid sm:grid-cols-8 h-[calc(100vh-64px)]'>
-			<div className='block sm:sticky top-[64px] self-start col-span-3 p-5'>
-				<TopSection next={api?.next} prev={api?.prev}>
-					<RandomButton pokemon={random} />
-				</TopSection>
-				<div className='flex flex-col relative min-w-[1px] max-w-full content-start item-stretch'>
-					<Card data={api} rating={reviews} />
+		// <div className='mx-auto flex max-w-6xl flex-col items-start md:flex-row lg:px-8'>
+		// 	<div className='w-full md:sticky md:top-16 md:w-[28rem] p-5'>
+		// 		<TopSection next={api?.next} prev={api?.prev}>
+		// 			<RandomButton pokemon={random} />
+		// 		</TopSection>
+		// 		<Card data={api} rating={reviews} />
+		// 		<ClientWrapper>
+		// 			<BottomSection pokemon={api?.name} gen={api?.gen} id={pokemon?.id} />
+		// 		</ClientWrapper>
+		// 	</div>
+		// 	<div className='mt-0 w-full min-w-0 flex-1 md:mt-0'>
+		// 		<div className='w-full min-w-0 flex-1 md:mt-0'>
+		// 			<dl className='grid grid-cols-1 gap-y-10 gap-x-8 md:max-w-xl lg:max-w-none lg:gap-y-16'>
+		// 				<ClientWrapper className='px-5 col-span-5 overflow-auto md:mt-5'>
+		// 					<ListReviews pokemon={params.pokemon} />
+		// 				</ClientWrapper>
+		// 			</dl>
+		// 		</div>
+		// 	</div>
+		// </div>
+		<div className='mt-[calc(-1*64px)] pt-[64px]'>
+			<div className='h-full max-w-6xl mx-auto'>
+				<div className='sm:grid sm:grid-cols-8 h-full max-h-screen'>
+					<div className='block sm:sticky top-[64px] self-start col-span-3 p-5'>
+						<TopSection next={api?.next} prev={api?.prev}>
+							<RandomButton pokemon={random} />
+						</TopSection>
+						<div className='flex flex-col relative min-w-[1px] max-w-full content-start item-stretch'>
+							<Card data={api} rating={reviews} />
+						</div>
+						<ClientWrapper>
+							<BottomSection
+								pokemon={api?.name}
+								gen={api?.gen}
+								id={pokemon?.id}
+							/>
+						</ClientWrapper>
+					</div>
+					<ClientWrapper className='p-5 col-span-5 overflow-auto'>
+						<ListReviews pokemon={params.pokemon} />
+					</ClientWrapper>
 				</div>
-				<ClientWrapper>
-					<BottomSection pokemon={api?.name} gen={api?.gen} id={pokemon?.id} />
-				</ClientWrapper>
 			</div>
-			<ClientWrapper className='p-5 col-span-5 overflow-auto sm:border-l border-gray-600'>
-				<ListReviews pokemon={params.pokemon} />
-			</ClientWrapper>
 		</div>
 	)
 }

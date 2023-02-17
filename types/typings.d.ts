@@ -12,6 +12,7 @@ export interface Pokemon {
 	prev: Nav
 	next: Nav
 	formatted_name: string
+	sprite: string
 }
 
 export interface Gen {
