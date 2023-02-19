@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { FavButton } from '../buttons/fav-button'
 import { ReviewButton } from '../buttons/review-button'
 import { BackDrop } from '../backdrop'
 import { Form } from '../form'
@@ -15,8 +14,7 @@ export const BottomSection = ({ pokemon, gen, id }: Props) => {
 	const [showModal, setShowModal] = useState(false)
 	return (
 		<>
-			<div className='flex items-stretch justify-between mt-4'>
-				<FavButton />
+			<div className='flex items-stretch justify-between pt-4'>
 				<ReviewButton openModal={() => setShowModal(true)} />
 			</div>
 			<BackDrop visible={showModal} close={() => setShowModal(false)}>

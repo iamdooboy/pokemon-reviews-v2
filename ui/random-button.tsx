@@ -8,7 +8,7 @@ export const RandomButton = ({ pokemon }: any) => {
 			className='flex items-center justify-center text-white'
 			href={`/gen/${pokemon.gen}/${pokemon.name}`}
 		>
-			<RefreshCw />
+			<RefreshCw className='hover:rotate-180 duration-500 hover:text-gray-400' />
 		</Link>
 	)
 }
