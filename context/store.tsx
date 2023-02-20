@@ -16,20 +16,22 @@ interface GlobalContextProps {
 const GlobalContext = React.createContext<ContextProps>({
 	pokemon: [],
 	setPokemon: (): Pokemon[] => [],
-	user: { id: '', username: '' }
+	user: { id: '', username: '', name: '' }
 })
 
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
 	const [pokemon, setPokemon] = React.useState<[] | Pokemon[]>([])
 	const [user, setUser] = React.useState({
 		id: currentUser?.id,
-		username: currentUser?.username
+		username: currentUser?.username,
+		name: currentUser?.name
 	})
 
 	pb.authStore.onChange(() => {
 		setUser({
 			id: pb.authStore.model?.id,
-			username: pb.authStore.model?.username
+			username: pb.authStore.model?.username,
+			name: pb.authStore.model?.name
 		})
 	})
 

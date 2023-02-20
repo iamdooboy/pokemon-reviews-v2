@@ -1,10 +1,10 @@
 'use client'
 import { ChangeEvent, useState } from 'react'
 import { Rating } from './rating'
-import { pb, currentUser } from '@/lib/pocketbase'
+import { pb } from '@/lib/pocketbase'
 import { useGlobalContext } from 'context/store'
-import { Records } from 'types/typings'
 import { mutate } from 'swr'
+import { useRouter } from 'next/navigation'
 
 interface Props {
 	pokemon: string
@@ -14,7 +14,7 @@ interface Props {
 }
 
 interface User {
-	username: string
+	name: string
 	password: string
 	passwordConfirm: string
 }
@@ -23,11 +23,12 @@ const CHAR_SET =
 	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
 export const Form = ({ pokemon, gen, id, close }: Props) => {
+	const router = useRouter()
 	const [name, setName] = useState('')
 	const [rating, setRating] = useState(0)
 	const [text, setText] = useState('')
 	const [loading, setLoading] = useState(false)
-	const [password, setPassword] = useState('')
+	const [_, setPassword] = useState('')
 	const { user } = useGlobalContext()
 
 	const onClickHandler = (value: number): void => {
@@ -59,12 +60,13 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 	const submitHandler = async (e: React.FormEvent) => {
 		setLoading(true)
 		e.preventDefault()
+		const currentUser = pb.authStore.model
 		let userId = currentUser?.id
 
 		if (!currentUser) {
 			const pw = generatePassword()
 			const newUserData: User = {
-				username: name,
+				name,
 				password: pw,
 				passwordConfirm: pw
 			}
@@ -82,20 +84,14 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 		}
 		try {
 			await pb.collection('reviews').create(data)
-
-			mutate(() =>
-				pb.collection('reviews').getList<Records>(1, 30, {
-					filter: `pokedex.pokemon='${pokemon}'`,
-					expand: 'user',
-					$autoCancel: false
-				})
-			)
+			mutate(`/${pokemon}`)
 		} catch (error) {
 			console.log(error)
 		}
 
 		setLoading(false)
 		close()
+		router.refresh()
 	}
 
 	if (loading) return <div>loading</div>
@@ -117,7 +113,7 @@ export const Form = ({ pokemon, gen, id, close }: Props) => {
 							type='text'
 							className='rounded-lg flex-1 border border-slate-500 w-full py-2 px-4 bg-gray-700 text-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent'
 							placeholder='Name'
-							value={user.username}
+							value={user.name}
 						/>
 					</div>
 					<div className='col-span-2'>

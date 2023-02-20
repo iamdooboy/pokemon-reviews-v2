@@ -11,6 +11,15 @@ export interface Pokemon {
 	gen: number
 	prev: Nav
 	next: Nav
+	formatted_name: string
+	sprite: string
+}
+
+export interface Gen {
+	id: string
+	name: string
+	image: string
+	link: string
 }
 
 export interface Nav {
@@ -30,6 +39,7 @@ export interface Records {
 	text: string
 	expand: {
 		user: {
+			name: string
 			username: string
 		}
 	}
@@ -39,9 +49,13 @@ export interface Records {
 	}
 	created: string
 	gen: number
+	user: string
+	likes: string[]
+	dislikes: string[]
 }
 
 export interface User {
 	id: string | undefined
 	username: string | undefined
+	name: string | undefined
 }

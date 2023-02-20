@@ -1,11 +1,13 @@
+'use client'
+
+import { Records } from 'types/typings'
+
 interface ReviewProps {
-	username: string
-	date: string
-	rating: number
-	text: string
+	data: Records
+	children: React.ReactNode
 }
 
-export const timeOffset = (time: string) => {
+const timeOffset = (time: string) => {
 	const createdAt = new Date(time)
 	const now = new Date()
 	const offset = now.getTime() - createdAt.getTime()
@@ -68,40 +70,54 @@ export const timeOffset = (time: string) => {
 	return `${years} year ago`
 }
 
-export const Review = ({ username, date, rating, text }: ReviewProps) => {
-	const diff = timeOffset(date)
+export const Review = ({ data, children }: ReviewProps) => {
+	const diff = timeOffset(data.created)
 	return (
-		<article className='border border-gray-700 rounded-lg p-4'>
+		<article className='border border-gray-700 rounded-lg p-4 space-y-3'>
 			<div className='flex mb-2 space-x-4 items-center'>
 				<img
 					className='w-10 h-10 rounded-full'
-					src={`https://avatars.dicebear.com/api/identicon/${username}.svg`}
+					src={`https://avatars.dicebear.com/api/adventurer-neutral/${data.expand.user.username}.svg`}
 					alt=''
 				/>
 				<div className='flex flex-col font-medium text-white justify-between'>
-					<text>{username}</text>
-					<text className='text-gray-500 text-sm'>{diff}</text>
+					<div>{data.expand.user.name}</div>
+					<div className='text-gray-500 text-sm'>{diff}</div>
 				</div>
 			</div>
 
-			<p className='mb-2 font-light text-gray-500 dark:text-gray-400'>{text}</p>
-			<div className='flex items-center mb-1'>
-				{Array(rating)
+			<p className='font-light text-gray-500 dark:text-gray-400'>{data.text}</p>
+			<div className='flex items-center gap-2'>
+				{Array(data.rating)
 					.fill(1)
 					.map((_, i) => (
 						<svg
 							key={i}
-							aria-hidden='true'
-							className='w-5 h-5 text-yellow-400'
-							fill='currentColor'
-							viewBox='0 0 20 20'
+							className='fill-yellow-500 stroke-2 stroke-yellow-500'
 							xmlns='http://www.w3.org/2000/svg'
+							width='17'
+							height='17'
+							viewBox='0 0 24 24'
 						>
-							<title>First star</title>
-							<path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z'></path>
+							<polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
+						</svg>
+					))}
+				{Array(5 - data.rating)
+					.fill(1)
+					.map((_, i) => (
+						<svg
+							key={i}
+							className='fill-gray-500 stroke-2 stroke-gray-500'
+							xmlns='http://www.w3.org/2000/svg'
+							width='17'
+							height='17'
+							viewBox='0 0 24 24'
+						>
+							<polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
 						</svg>
 					))}
 			</div>
+			{children}
 		</article>
 	)
 }

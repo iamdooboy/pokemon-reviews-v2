@@ -1,32 +1,40 @@
 import Link from 'next/link'
-import { Pokemon, Nav } from 'types/typings'
+import { Nav } from 'types/typings'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 interface Props {
 	prev: Nav
 	next: Nav
-	pokemon: Pokemon
+	children: React.ReactNode
 }
 
-export const TopSection = ({ prev, next, pokemon }: Props) => {
+export const TopSection = ({ prev, next, children }: Props) => {
 	return (
-		<div className='flex items-stretch justify-between mb-4'>
+		<div className='flex justify-between mb-4'>
 			<Link
 				href={`/gen/${prev.gen}/${prev.name}`}
-				className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
+				className='rounded-lg text-white hover:bg-slate-600'
 			>
-				Prev
+				<div className='flex place-items-center justify-center gap-2'>
+					<ArrowLeft />
+					<img
+						className='w-10 aspect-square'
+						src={`https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/${prev.id}.png`}
+					/>
+				</div>
 			</Link>
-			<Link
-				href={`/gen/${pokemon.gen}/${pokemon.name}`}
-				className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
-			>
-				Surprise Me
-			</Link>
+			{children}
 			<Link
 				href={`/gen/${next.gen}/${next.name}`}
-				className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'
+				className='rounded-lg text-white hover:bg-slate-600'
 			>
-				Next
+				<div className='flex place-items-center justify-center gap-2'>
+					<img
+						className='w-10 aspect-square'
+						src={`https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/${next.id}.png`}
+					/>
+					<ArrowRight />
+				</div>
 			</Link>
 		</div>
 	)
