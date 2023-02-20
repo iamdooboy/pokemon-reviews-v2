@@ -14,7 +14,7 @@ export const BottomSection = ({ pokemon, gen, id }: Props) => {
 	const [showModal, setShowModal] = useState(false)
 	return (
 		<>
-			<div className='flex items-stretch justify-between pt-4'>
+			<div className='flex items-stretch justify-between pt-5'>
 				<ReviewButton openModal={() => setShowModal(true)} />
 			</div>
 			<BackDrop visible={showModal} close={() => setShowModal(false)}>
