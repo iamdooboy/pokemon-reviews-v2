@@ -1,9 +1,7 @@
-
 //import { Grid } from '@/ui/gen-page/grid'
 import { Pokemon, Flat, Records } from 'types/typings'
 import { TestLayout } from '@/ui/TestLayout'
 import { pb } from '@/lib/pocketbase'
-
 
 async function getGen(id: string): Promise<Pokemon[]> {
 	try {

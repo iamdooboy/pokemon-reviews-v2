@@ -1,4 +1,4 @@
-import { ReviewButton } from '@/ui/buttons/review-button'
+//import { ReviewButton } from '@/ui/buttons/review-button'
 import { ArrowLeft, ArrowRight, RefreshCw } from 'lucide-react'
 
 interface Props {
