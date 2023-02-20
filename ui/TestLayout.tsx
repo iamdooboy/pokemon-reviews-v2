@@ -8,9 +8,10 @@ import { Flat } from 'types/typings'
 interface PokemonArray {
 	pokemon: Pokemon[]
 	reviews: Flat
-}
+
 
 const VISIBLE = 24
+
 
 export const TestLayout = ({ pokemon, reviews }: PokemonArray) => {
 	const [items, SetItems] = useState<[] | Pokemon[]>([])
