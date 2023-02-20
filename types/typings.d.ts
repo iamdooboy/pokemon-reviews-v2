@@ -12,6 +12,7 @@ export interface Pokemon {
 	prev: Nav
 	next: Nav
 	formatted_name: string
+	sprite: string
 }
 
 export interface Gen {
@@ -37,6 +38,9 @@ export interface Records {
 	id: string
 	text: string
 	expand: {
+		pokedex: {
+			pokemon: string
+		}
 		user: {
 			name: string
 			username: string
@@ -57,4 +61,11 @@ export interface User {
 	id: string | undefined
 	username: string | undefined
 	name: string | undefined
+}
+
+export interface Flat {
+	[key: string]: {
+		rating: number
+		count: number
+	}
 }
