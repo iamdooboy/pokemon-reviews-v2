@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { Pokemon } from 'types/typings'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import { Flat } from 'types/typings'
 
 interface PokemonArray {
 	pokemon: Pokemon[]
-}
+	reviews: Flat
+
 
 const VISIBLE = 24
 
-export const TestLayout = ({ pokemon }: PokemonArray) => {
+
+export const TestLayout = ({ pokemon, reviews }: PokemonArray) => {
 	const [items, SetItems] = useState<[] | Pokemon[]>([])
 	const [currentPage, setCurrentPage] = useState(1)
 	const indexOfLastRecord = currentPage * VISIBLE
@@ -55,9 +58,15 @@ export const TestLayout = ({ pokemon }: PokemonArray) => {
 							<img className='aspect-square w-16' src={item.sprite} />
 							<div className='flex justify-evenly items-center gap-2'>
 								<Star color='#F59E0B' size={18} fill='#F59E0B' />
-								<h1 className='font-bold'>0.0</h1>
+								<h1 className='font-bold'>
+									{reviews[item.name]
+										? reviews[item.name].rating.toFixed(1)
+										: Number(0).toFixed(1)}
+								</h1>
 							</div>
-							<div className='text-xs text-gray-400'>0 reviews</div>
+							<div className='text-xs text-gray-400'>
+								{reviews[item.name] ? reviews[item.name].count : 0} reviews
+							</div>
 						</div>
 					</div>
 				</Link>
