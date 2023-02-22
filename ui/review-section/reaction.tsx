@@ -67,7 +67,6 @@ export const Reaction = ({ record, children }: ReactionProps) => {
 			likes: tempLikes,
 			dislikes: tempDislikes
 		}
-
 		await pb.collection('reviews').update(record.id, data, {
 			$autoCancel: false
 		})
