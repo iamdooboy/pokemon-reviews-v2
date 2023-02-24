@@ -15,19 +15,33 @@ const GEN = [
 export default async function Page() {
 	return (
 		<div className='mx-auto max-w-6xl place-items-center'>
-			<div className='grid grid-cols-3 gap-3'>
-				<div className='col-span-3 bg-red-400'>11</div>
-				{GEN.map(eachGen => (
-					<NextLink key={eachGen.number} href={`/gen/${eachGen.number}`}>
-						<div className='col-span-1 bg-gray-500'>
-							Gen {eachGen.number}
-							<div className='inline-flex w-full place-content-center'>
-								<img className='h-40' src={`/${eachGen.male}.png`} />
-								<img className='h-40' src={`/${eachGen.female}.png`} />
-							</div>
-						</div>
-					</NextLink>
-				))}
+			<div className='grid grid-cols-3 gap-8'>
+				<div className='col-span-1 border border-gray-600 rounded-lg'>
+					<div className='font-bold text-2xl text-white'>Featured Pokemon</div>
+					<img
+						className='w-72 mx-auto'
+						src='https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0197.png'
+					/>
+					<div className='text-lg'>Umbreon</div>
+				</div>
+				<div className='col-span-2 border border-gray-600 p-10 rounded-lg'>
+					<div className='font-bold text-2xl text-white'>
+						Explore different generations
+					</div>
+
+					<div className='grid grid-cols-3 gap-16'>
+						{GEN.map(eachGen => (
+							<NextLink key={eachGen.number} href={`/gen/${eachGen.number}`}>
+								<div className='col-span-1 border border-gray-600 rounded-md text-center text-gray-400'>
+									Gen {eachGen.number}
+								</div>
+							</NextLink>
+						))}
+					</div>
+				</div>
+				<div className='col-span-3 bg-red-400'>
+					<div>Discover highly rated Pokemon</div>
+				</div>
 			</div>
 		</div>
 	)
