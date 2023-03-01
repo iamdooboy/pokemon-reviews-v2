@@ -2,7 +2,7 @@
 
 import useSWR, { mutate } from 'swr'
 import { pb } from '@/lib/pocketbase'
-import { Records } from 'types/typings'
+import { Review as ReviewProps } from 'types/typings'
 import { Review } from './review'
 import { Reaction } from './reaction'
 import { useRouter } from 'next/navigation'
@@ -14,7 +14,7 @@ interface ListReviewsProps {
 
 export const ListReviews = ({ pokemon }: ListReviewsProps) => {
 	const fetcher = () =>
-		pb.collection('reviews').getList<Records>(1, 30, {
+		pb.collection('reviews').getList<ReviewProps>(1, 30, {
 			filter: `pokedex.pokemon='${pokemon}'`,
 			expand: 'user',
 			$autoCancel: false

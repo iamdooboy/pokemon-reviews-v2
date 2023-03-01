@@ -37,15 +37,6 @@ export interface Variations {
 export interface Records {
 	id: string
 	text: string
-	expand: {
-		pokedex: {
-			pokemon: string
-		}
-		user: {
-			name: string
-			username: string
-		}
-	}
 	rating: number
 	pokedex: {
 		pokemon: string
@@ -55,6 +46,13 @@ export interface Records {
 	user: string
 	likes: string[]
 	dislikes: string[]
+}
+
+export interface Review extends Records {
+	expand: {
+		pokedex: Pokedex
+		user: User
+	}
 }
 
 export interface User {
@@ -68,4 +66,22 @@ export interface Flat {
 		rating: number
 		count: number
 	}
+}
+
+export interface Pokedex {
+	id: string
+	pokemon: string
+	ndex: string
+	gen: number
+	created: string
+}
+
+export interface RecentReview {
+	user?: string
+	created: string
+	dislikes: number
+	pokemon: string
+	likes: number
+	rating: number
+	text: string
 }
