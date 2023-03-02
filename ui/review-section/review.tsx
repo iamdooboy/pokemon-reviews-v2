@@ -1,9 +1,9 @@
 'use client'
 
-import { Records } from 'types/typings'
+import { Review as ReviewType } from 'types/typings'
 
 interface ReviewProps {
-	data: Records
+	data: ReviewType
 	children: React.ReactNode
 }
 
