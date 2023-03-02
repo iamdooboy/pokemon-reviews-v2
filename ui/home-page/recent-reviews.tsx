@@ -2,10 +2,11 @@ import React from 'react'
 import { Box } from './box'
 import { Header } from './header'
 import { RecentReview } from 'types/typings'
+import { Star } from 'lucide-react'
 
 export const RecentReviews = ({ reviews }: { reviews: RecentReview[] }) => {
 	return (
-		<Box colSpan={6} px={10} py={4}>
+		<Box colSpan={6}>
 			<Header>Recent Reviews</Header>
 			<div className='grid grid-cols-6 gap-4'>
 				{reviews.map(review => (
@@ -40,34 +41,12 @@ const Review = ({ review }: { review: RecentReview }) => (
 
 		<p className='font-light text-gray-500 dark:text-gray-400'>{review.text}</p>
 		<div className='flex items-center gap-2'>
-			{Array(review.rating)
-				.fill(1)
-				.map((_, i) => (
-					<svg
-						key={i}
-						className='fill-yellow-500 stroke-2 stroke-yellow-500'
-						xmlns='http://www.w3.org/2000/svg'
-						width='17'
-						height='17'
-						viewBox='0 0 24 24'
-					>
-						<polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
-					</svg>
-				))}
-			{Array(5 - review.rating)
-				.fill(1)
-				.map((_, i) => (
-					<svg
-						key={i}
-						className='fill-yellow-500 stroke-2 stroke-yellow-500'
-						xmlns='http://www.w3.org/2000/svg'
-						width='17'
-						height='17'
-						viewBox='0 0 24 24'
-					>
-						<polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' />
-					</svg>
-				))}
+			{[...Array(review.rating)].map((_, i) => (
+				<Star key={i} fill='#FACC15' color='#FACC15' size={20} />
+			))}
+			{[...Array(5 - review.rating)].map((_, i) => (
+				<Star key={i} fill='#6B7280' color='#6B7280' size={20} />
+			))}
 		</div>
 	</article>
 )

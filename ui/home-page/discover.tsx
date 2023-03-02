@@ -5,7 +5,7 @@ import { POKEMON } from 'homepage'
 
 export const Discover = () => {
 	return (
-		<Box colSpan={6} px={10} py={4}>
+		<Box colSpan={6}>
 			<Header>Discover highly rated Pokemon</Header>
 			<div className='grid grid-cols-6 gap-16'>
 				{POKEMON.map(eachPokemon => (

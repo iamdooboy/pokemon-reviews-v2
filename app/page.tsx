@@ -34,12 +34,8 @@ export default async function Page() {
 			<div className='grid grid-cols-6 gap-8'>
 				<TagLine />
 				<Featured />
-				{/* <div className='col-span-4 border border-gray-600 rounded-lg'>
-					hello
-				</div> */}
 				<Generation />
 				<Discover />
-
 				<RecentReviews reviews={reviews} />
 			</div>
 		</div>

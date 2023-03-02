@@ -16,8 +16,9 @@ const GEN = [
 
 export const Generation = () => {
 	return (
-		<Box colSpan={4} px={10} py={10}>
+		<Box colSpan={4}>
 			<Header>Explore different generations</Header>
+			{/* <div className='place-items-center'> */}
 			<div className='grid grid-cols-3 gap-16'>
 				{GEN.map(eachGen => (
 					<NextLink key={eachGen.number} href={`/gen/${eachGen.number}`}>
@@ -27,6 +28,7 @@ export const Generation = () => {
 					</NextLink>
 				))}
 			</div>
+			{/* </div> */}
 		</Box>
 	)
 }
