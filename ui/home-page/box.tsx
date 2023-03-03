@@ -11,7 +11,7 @@ export const Box = ({
 	return (
 		<div
 			className={clsx(
-				`col-span-${colSpan} border border-gray-600 rounded-lg px-5 py-5 space-y-5`
+				`col-span-${colSpan} border border-gray-600 rounded-lg px-5 py-5 space-y-5 h-full`
 			)}
 		>
 			{children}

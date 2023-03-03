@@ -5,18 +5,12 @@ import { Card } from '@/ui/pokemon-page/card'
 import { BottomSection } from '@/ui/pokemon-page/bottom-section'
 import { TopSection } from '@/ui/pokemon-page/top-section'
 import { RandomButton } from '@/ui/random-button'
+import { getRandomInt } from 'utils'
 
 interface PokemonProps {
 	params: {
 		pokemon: string
 	}
-}
-
-const getRandomInt = (min: number, max: number): string => {
-	min = Math.ceil(min)
-	max = Math.floor(max)
-	const num = Math.floor(Math.random() * (max - min) + min)
-	return String(num).padStart(4, '0')
 }
 
 const getRandomPokemon = async () => {
