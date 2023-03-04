@@ -65,63 +65,63 @@ export const POKEMON = [
 			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0887.png',
 		gen: 8,
 		formatted_name: 'Dragapult'
+	},
+	{
+		id: '0399',
+		name: 'bidoof',
+		types: ['normal'],
+		image:
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0399.png',
+		gen: 4,
+		formatted_name: 'Bidoof'
+	},
+	{
+		id: '0258',
+		name: 'mudkip',
+		types: ['water'],
+		image:
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0258.png',
+		gen: 3,
+		formatted_name: 'Mudkip'
+	},
+	{
+		id: '0248',
+		name: 'tyranitar',
+		types: ['rock', 'dark'],
+		image:
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0248.png',
+
+		gen: 2,
+		formatted_name: 'Tyranitar'
+	},
+	{
+		id: '0094',
+		name: 'gengar',
+		types: ['ghost', 'poison'],
+		image:
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0094.png',
+
+		gen: 1,
+		formatted_name: 'Gengar'
+	},
+	{
+		id: '0980',
+		name: 'clodsire',
+		types: ['poison', 'ground'],
+		image:
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0980.png',
+
+		gen: 9,
+		formatted_name: 'Clodsire'
+	},
+	{
+		id: '0635',
+		name: 'hydreigon',
+		types: ['dark', 'dragon'],
+		image:
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0635.png',
+
+		gen: 5,
+		formatted_name: 'Hydreigon'
 	}
-	// {
-	// 	id: '0399',
-	// 	name: 'bidoof',
-	// 	types: ['normal'],
-	// 	image:
-	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0399.png',
-	// 	gen: 4,
-	// 	formatted_name: 'Bidoof'
-	// },
-	// {
-	// 	id: '0258',
-	// 	name: 'mudkip',
-	// 	types: ['water'],
-	// 	image:
-	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0258.png',
-	// 	gen: 3,
-	// 	formatted_name: 'Mudkip'
-	// },
-	// {
-	// 	id: '0248',
-	// 	name: 'tyranitar',
-	// 	types: ['rock', 'dark'],
-	// 	image:
-	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0248.png',
-
-	// 	gen: 2,
-	// 	formatted_name: 'Tyranitar'
-	// },
-	// {
-	// 	id: '0094',
-	// 	name: 'gengar',
-	// 	types: ['ghost', 'poison'],
-	// 	image:
-	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0094.png',
-
-	// 	gen: 1,
-	// 	formatted_name: 'Gengar'
-	// },
-	// {
-	// 	id: '0980',
-	// 	name: 'clodsire',
-	// 	types: ['poison', 'ground'],
-	// 	image:
-	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0980.png',
-
-	// 	gen: 9,
-	// 	formatted_name: 'Clodsire'
-	// },
-	// {
-	// 	id: '0635',
-	// 	name: 'hydreigon',
-	// 	types: ['dark', 'dragon'],
-	// 	image:
-	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0635.png',
-
-	// 	gen: 5,
-	// 	formatted_name: 'Hydreigon'
-	// }
 ]
