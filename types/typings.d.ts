@@ -81,7 +81,9 @@ export interface RecentReview {
 	created: string
 	dislikes: number
 	pokemon: string
+	pokedex: string
 	likes: number
 	rating: number
 	text: string
+	gen: number
 }

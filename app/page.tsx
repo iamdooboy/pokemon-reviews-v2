@@ -13,15 +13,17 @@ async function getRecentReviews() {
 	})
 
 	const reviews = reviewList.items.map(res => {
-		const { expand, created, dislikes, likes, rating, text } = res
+		const { expand, created, dislikes, likes, rating, text, gen } = res
 		return {
 			user: expand.user.name,
 			created: created,
 			dislikes: dislikes.length,
-			pokemon: expand.pokedex.ndex,
+			pokemon: expand.pokedex.pokemon,
+			pokedex: expand.pokedex.ndex,
 			likes: likes.length,
 			rating,
-			text
+			text,
+			gen
 		}
 	})
 	return reviews

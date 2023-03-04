@@ -12,145 +12,116 @@ export const GEN = [
 
 export const POKEMON = [
 	{
-		id: '0001',
-		name: 'bulbasaur',
-		types: ['grass', 'poison'],
-		mega: [],
-		variant: [],
-		forms: [],
+		id: '0658',
+		name: 'greninja',
+		types: ['water', 'dark'],
 		image:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0001.png',
-		default: '',
-		jpn: 'フシギダネ',
-		gen: 1,
-		prev: { id: '1008', name: 'miraidon', gen: 9 },
-		next: { id: '0002', name: 'ivysaur', gen: 1 },
-		formatted_name: 'Bulbasaur',
-		sprite:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/0001.png'
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0658.png',
+		gen: 6,
+		formatted_name: 'Greninja'
 	},
 	{
-		id: '0002',
-		name: 'ivysaur',
-		types: ['grass', 'poison'],
-		mega: [],
-		variant: [],
-		forms: [],
+		id: '1006',
+		name: 'iron-valiant',
+		types: ['fairy', 'fighting'],
 		image:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0002.png',
-		default: '',
-		jpn: 'フシギソウ',
-		gen: 1,
-		prev: { id: '0001', name: 'bulbasaur', gen: 1 },
-		next: { id: '0003', name: 'venusaur', gen: 1 },
-		formatted_name: 'Ivysaur',
-		sprite:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/0002.png'
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/1006.png',
+		gen: 9,
+		formatted_name: 'Iron Valiant'
 	},
 	{
-		id: '0003',
-		name: 'venusaur',
-		types: ['grass', 'poison'],
-		mega: [
-			{
-				name: 'mega venusaur',
-				types: ['grass', 'poison'],
-				image:
-					'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0003-mega.png'
-			}
-		],
-		variant: [],
-		forms: [
-			{
-				name: 'gigantamax venusaur',
-				types: ['grass', 'poison'],
-				image:
-					'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0003-gmax.png'
-			}
-		],
+		id: '0445',
+		name: 'garchomp',
+		types: ['dragon', 'ground'],
 		image:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0003.png',
-		default: '',
-		jpn: 'フシギバナ',
-		gen: 1,
-		prev: { id: '0002', name: 'ivysaur', gen: 1 },
-		next: { id: '0004', name: 'charmander', gen: 1 },
-		formatted_name: 'Venusaur',
-		sprite:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/0003.png'
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0445.png',
+		gen: 4,
+		formatted_name: 'Garchomp'
 	},
 	{
-		id: '0004',
-		name: 'charmander',
-		types: ['fire'],
-		mega: [],
-		variant: [],
-		forms: [],
+		id: '0778',
+		name: 'mimikyu',
+		types: ['ghost', 'fairy'],
 		image:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0004.png',
-		default: '',
-		jpn: 'ヒトカゲ',
-		gen: 1,
-		prev: { id: '0003', name: 'venusaur', gen: 1 },
-		next: { id: '0005', name: 'charmeleon', gen: 1 },
-		formatted_name: 'Charmander',
-		sprite:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/0004.png'
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0778.png',
+
+		gen: 7,
+		formatted_name: 'Mimikyu'
 	},
 	{
-		id: '0005',
-		name: 'charmeleon',
-		types: ['fire'],
-		mega: [],
-		variant: [],
-		forms: [],
+		id: '0197',
+		name: 'umbreon',
+		types: ['dark'],
 		image:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0005.png',
-		default: '',
-		jpn: 'リザード',
-		gen: 1,
-		prev: { id: '0004', name: 'charmander', gen: 1 },
-		next: { id: '0006', name: 'charizard', gen: 1 },
-		formatted_name: 'Charmeleon',
-		sprite:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/0005.png'
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0197.png',
+		gen: 2,
+		formatted_name: 'Umbreon'
 	},
 	{
-		id: '0006',
-		name: 'charizard',
-		types: ['fire', 'flying'],
-		mega: [
-			{
-				name: 'mega charizard x',
-				types: ['fire', 'dragon'],
-				image:
-					'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0006-mega-x.png'
-			},
-			{
-				name: 'mega charizard y',
-				types: ['fire', 'flying'],
-				image:
-					'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0006-mega-y.png'
-			}
-		],
-		variant: [],
-		forms: [
-			{
-				name: 'gigantamax charizard',
-				types: ['fire', 'flying'],
-				image:
-					'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0006-gmax.png'
-			}
-		],
+		id: '0887',
+		name: 'dragapult',
+		types: ['dragon', 'ghost'],
 		image:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0006.png',
-		default: '',
-		jpn: 'リザードン',
-		gen: 1,
-		prev: { id: '0005', name: 'charmeleon', gen: 1 },
-		next: { id: '0007', name: 'squirtle', gen: 1 },
-		formatted_name: 'Charizard',
-		sprite:
-			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/sprites/0006.png'
+			'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0887.png',
+		gen: 8,
+		formatted_name: 'Dragapult'
 	}
+	// {
+	// 	id: '0399',
+	// 	name: 'bidoof',
+	// 	types: ['normal'],
+	// 	image:
+	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0399.png',
+	// 	gen: 4,
+	// 	formatted_name: 'Bidoof'
+	// },
+	// {
+	// 	id: '0258',
+	// 	name: 'mudkip',
+	// 	types: ['water'],
+	// 	image:
+	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0258.png',
+	// 	gen: 3,
+	// 	formatted_name: 'Mudkip'
+	// },
+	// {
+	// 	id: '0248',
+	// 	name: 'tyranitar',
+	// 	types: ['rock', 'dark'],
+	// 	image:
+	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0248.png',
+
+	// 	gen: 2,
+	// 	formatted_name: 'Tyranitar'
+	// },
+	// {
+	// 	id: '0094',
+	// 	name: 'gengar',
+	// 	types: ['ghost', 'poison'],
+	// 	image:
+	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0094.png',
+
+	// 	gen: 1,
+	// 	formatted_name: 'Gengar'
+	// },
+	// {
+	// 	id: '0980',
+	// 	name: 'clodsire',
+	// 	types: ['poison', 'ground'],
+	// 	image:
+	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0980.png',
+
+	// 	gen: 9,
+	// 	formatted_name: 'Clodsire'
+	// },
+	// {
+	// 	id: '0635',
+	// 	name: 'hydreigon',
+	// 	types: ['dark', 'dragon'],
+	// 	image:
+	// 		'https://raw.githubusercontent.com/iamdooboy/pokemon-images/main/assets/images/0635.png',
+
+	// 	gen: 5,
+	// 	formatted_name: 'Hydreigon'
+	// }
 ]
