@@ -50,7 +50,11 @@ export const TestLayout = ({ pokemon, reviews }: PokemonArray) => {
 				</button>
 			</div>
 			{items.slice(indexOfFirstRecord, indexOfLastRecord).map(item => (
-				<Link href={`/gen/${item.gen}/${item.name}`} prefetch={false}>
+				<Link
+					href={`/gen/${item.gen}/${item.name}`}
+					prefetch={false}
+					key={item.id}
+				>
 					<div className='col-span-1 hover:scale-105 hover:rounded-lg transition ease-in-out hover:bg-slate-700'>
 						<div className='flex flex-col items-center justify-center aspect-square border rounded-lg border-slate-500'>
 							<div>{item.formatted_name}</div>

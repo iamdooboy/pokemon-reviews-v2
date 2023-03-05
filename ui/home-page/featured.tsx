@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const Featured = () => {
 	return (
-		<Box colSpan={2}>
+		<Box className='col-span-2'>
 			<Link href='/gen/3/spheal'>
 				<Header>Featured Pokemon</Header>
 				<img

@@ -16,7 +16,7 @@ const GEN = [
 
 export const Generation = () => {
 	return (
-		<Box colSpan={4}>
+		<Box className='col-span-4'>
 			<Header>Explore different generations</Header>
 			{/* <div className='place-items-center'> */}
 			<div className='grid grid-cols-3 gap-14'>

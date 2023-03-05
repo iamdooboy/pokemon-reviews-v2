@@ -1,5 +1,5 @@
 //import { Grid } from '@/ui/gen-page/grid'
-import { Pokemon, Flat, Records } from 'types/typings'
+import { Pokemon, Flat, Review } from 'types/typings'
 import { TestLayout } from '@/ui/TestLayout'
 import { pb } from '@/lib/pocketbase'
 
@@ -16,7 +16,7 @@ async function getGen(id: string): Promise<Pokemon[]> {
 
 async function getReviews(id: string): Promise<Flat> {
 	try {
-		const records: Records[] = await pb.collection('reviews').getFullList(200, {
+		const records: Review[] = await pb.collection('reviews').getFullList(200, {
 			filter: `gen=${id}`,
 			sort: 'pokedex.ndex',
 			expand: 'pokedex',

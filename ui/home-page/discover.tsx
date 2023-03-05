@@ -36,7 +36,7 @@ export const Discover = () => {
 		setCurrentPage(prev => prev + 1)
 	}
 	return (
-		<Box colSpan={6}>
+		<Box className='col-span-6'>
 			<TooltipProvider delayDuration={0}>
 				<Header>Discover highly rated Pokemon</Header>
 				<div className='flex gap-4'>
@@ -46,7 +46,7 @@ export const Discover = () => {
 					<div className='grid grid-cols-6 gap-16'>
 						{POKEMON.slice(indexOfFirstRecord, indexOfLastRecord).map(
 							eachPokemon => (
-								<div className='col-span-1'>
+								<div className='col-span-1' key={eachPokemon.id}>
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Link

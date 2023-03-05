@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box } from './box'
 import { Header } from './header'
 import { RecentReview } from 'types/typings'
@@ -7,11 +6,11 @@ import Link from 'next/link'
 
 export const RecentReviews = ({ reviews }: { reviews: RecentReview[] }) => {
 	return (
-		<Box colSpan={6}>
+		<Box className='col-span-6'>
 			<Header>Recent Reviews</Header>
 			<div className='grid grid-cols-6 gap-4'>
 				{reviews.map(review => (
-					<div className='col-span-2'>
+					<div className='col-span-2' key={review.pokedex}>
 						<Review review={review} />
 					</div>
 				))}
