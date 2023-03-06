@@ -10,7 +10,7 @@ export const RecentReviews = ({ reviews }: { reviews: RecentReview[] }) => {
 			<Header>Recent Reviews</Header>
 			<div className='grid grid-cols-6 gap-4'>
 				{reviews.map(review => (
-					<div className='col-span-2' key={review.pokedex}>
+					<div className='col-span-6 md:col-span-2' key={review.pokedex}>
 						<Review review={review} />
 					</div>
 				))}
@@ -43,7 +43,7 @@ const Review = ({ review }: { review: RecentReview }) => (
 			<p className='font-light text-gray-500 dark:text-gray-400'>
 				{review.text}
 			</p>
-			<div className='flex items-center gap-2'>
+			<div className='flex items-center gap-2 mt-3'>
 				{[...Array(review.rating)].map((_, i) => (
 					<Star key={i} fill='#FACC15' color='#FACC15' size={20} />
 				))}

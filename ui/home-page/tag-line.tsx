@@ -4,6 +4,7 @@ import { RefreshCw } from 'lucide-react'
 import { getRandomInt } from 'utils'
 import { pb } from '@/lib/pocketbase'
 import Link from 'next/link'
+export const fetchCache = 'only-no-store'
 
 const getRandomPokemon = async () => {
 	const random = getRandomInt(0, 1009)

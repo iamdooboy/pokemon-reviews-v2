@@ -39,7 +39,7 @@ export const TestLayout = ({ pokemon, reviews }: PokemonArray) => {
 		setCurrentPage(prev => prev + 1)
 	}
 	return (
-		<div className='grid grid-cols-3 md:grid-cols-6 gap-4 text-white '>
+		<div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 text-white '>
 			<div className='col-span-full flex justify-between bg-slate-600 py-3 text-gray-200 text-2xl w-full text-center rounded-full font-bold shadow-lgdow'>
 				<button>
 					<ChevronLeft size={32} onClick={goBack} />
