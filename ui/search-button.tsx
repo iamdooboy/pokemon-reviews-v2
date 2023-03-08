@@ -34,7 +34,7 @@ export const SearchButton = () => {
 			<button
 				onClick={onClickHandler}
 				type='button'
-				className='border pr-8 border-gray-600 focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-auto items-center text-gray-600 inline-flex mr-2 sm:py-2'
+				className='bg-slate-700 border h-full md:h-fit md:pr-8 border-gray-600 focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium w-full md:w-1/2 rounded-lg text-sm items-center text-gray-600 inline-flex mr-2 sm:py-2'
 			>
 				<div className='mx-3'>
 					<svg

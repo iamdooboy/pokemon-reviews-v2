@@ -26,7 +26,7 @@ const Review = ({ review }: { review: RecentReview }) => (
 				<div className='flex space-x-4 items-center'>
 					<img
 						className='w-10 h-10 rounded-full'
-						src={`https://avatars.dicebear.com/api/adventurer-neutral/${review.user}.svg`}
+						src={`https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=${review.user}`}
 						alt=''
 					/>
 					<div className='flex flex-col font-medium text-white justify-between'>

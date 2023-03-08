@@ -90,7 +90,7 @@ export const Card = ({ data, rating }: Props) => {
 				<div className='h-full w-full bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50 p-4'>
 					<div>
 						<div className='p-2 bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 border-2 border-gray-500'>
-							<div className='fixed text-5xl lg:text-5xl md:text-3xl font-bold opacity-30 text-white z-30'>
+							<div className='absolute text-5xl lg:text-5xl md:text-3xl font-bold opacity-30 text-white z-30'>
 								{data?.jpn}
 							</div>
 							<div className='p-3'>
@@ -123,7 +123,7 @@ export const Card = ({ data, rating }: Props) => {
 											<Star key={i} fill='#FACC15' color='#FACC15' />
 										))}
 										{[...Array(5 - rounded)].map((_, i) => (
-											<Star key={i} fill='#6B7280' color='#6B7280' />
+											<Star className='text-gray-400 fill-gray-400' key={i} />
 										))}
 									</div>
 								</div>

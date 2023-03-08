@@ -95,8 +95,8 @@ export default async function Page({ params }: PokemonProps) {
 	])
 
 	return (
-		<div className='mx-auto flex max-w-6xl flex-col items-start md:flex-row lg:px-8'>
-			<div className='w-full md:sticky md:top-16 md:w-[28rem] p-5'>
+		<div className='mx-auto flex max-w-6xl flex-col items-start gap-24 md:flex-row pt-4'>
+			<div className='w-full md:sticky md:top-16 md:w-[28rem] pt-5'>
 				<TopSection next={api?.next} prev={api?.prev}>
 					<RandomButton pokemon={random} />
 				</TopSection>
@@ -108,7 +108,7 @@ export default async function Page({ params }: PokemonProps) {
 			<div className='mt-0 w-full min-w-0 flex-1'>
 				<div className='w-full min-w-0 flex-1 md:mt-0'>
 					<div className='grid grid-cols-1 gap-y-10 gap-x-8 md:max-w-xl lg:max-w-none lg:gap-y-16'>
-						<ClientWrapper className='px-5 col-span-5 overflow-auto md:mt-5 pb-5'>
+						<ClientWrapper className='col-span-5 overflow-auto md:mt-5 pb-5'>
 							<ListReviews pokemon={params.pokemon} />
 						</ClientWrapper>
 					</div>

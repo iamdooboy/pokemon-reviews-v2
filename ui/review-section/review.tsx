@@ -77,7 +77,7 @@ export const Review = ({ data, children }: ReviewProps) => {
 			<div className='flex mb-2 space-x-4 items-center'>
 				<img
 					className='w-10 h-10 rounded-full'
-					src={`https://avatars.dicebear.com/api/adventurer-neutral/${data.expand.user.username}.svg`}
+					src={`https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=${data.expand.user.username}`}
 					alt=''
 				/>
 				<div className='flex flex-col font-medium text-white justify-between'>

@@ -30,12 +30,12 @@ const MenuDropDown = ({ isOpen, toggle, username, close, name }: Props) => {
 		<div className='relative inline-block text-left'>
 			<div className='flex items-center cursor-pointer' onClick={toggle}>
 				<img
-					src={`https://avatars.dicebear.com/api/adventurer-neutral/${username}.svg`}
-					className='rounded-full w-10 hidden sm:inline'
+					src={`https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=${username}`}
+					className='rounded-full w-10'
 					alt='Avatar'
 				/>
 				<svg
-					className='-mr-1 ml-1 h-5 w-5 text-gray-400'
+					className='-mr-1 ml-1 h-8 w-8 text-gray-400 hidden md:block'
 					xmlns='http://www.w3.org/2000/svg'
 					viewBox='0 0 20 20'
 					fill='currentColor'

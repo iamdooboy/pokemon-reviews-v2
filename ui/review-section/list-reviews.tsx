@@ -25,7 +25,14 @@ export const ListReviews = ({ pokemon }: ListReviewsProps) => {
 		revalidateOnReconnect: false
 	})
 
-	if (isLoading) return <div>loading</div>
+	if (isLoading)
+		return (
+			<div className='flex flex-col gap-4'>
+				{[...Array(4)].map(_ => (
+					<ReviewLoading />
+				))}
+			</div>
+		)
 
 	return (
 		<>
@@ -127,3 +134,22 @@ const Ellipsis = ({ id }: { id: string }) => {
 		</Popover.Root>
 	)
 }
+
+const ReviewLoading = () => (
+	<div className='border border-gray-700 rounded-lg p-4 animate-pulse'>
+		<div className='flex gap-3'>
+			<div className=''>
+				<span className='w-10 h-10 block bg-gray-200 rounded-full dark:bg-gray-700'></span>
+			</div>
+			<div className='flex flex-col w-full gap-3'>
+				<div className='w-1/3 h-4 rounded-lg bg-gray-700'></div>
+				<div className='w-1/4 h-4 rounded-lg bg-gray-700'></div>
+			</div>
+		</div>
+		<div className='flex flex-col gap-3 mt-3'>
+			<div className='w-full h-4 rounded-md bg-gray-700'></div>
+			<div className='w-full h-4 rounded-md bg-gray-700'></div>
+			<div className='w-full h-4 rounded-md bg-gray-700'></div>
+		</div>
+	</div>
+)

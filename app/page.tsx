@@ -33,7 +33,7 @@ export default async function Page() {
 	const reviews = await getRecentReviews()
 	return (
 		<div className='mx-auto max-w-6xl place-items-center py-32'>
-			<div className='grid grid-cols-6 gap-8'>
+			<div className='grid grid-cols-6 gap-8 px-4 md:px-0'>
 				<TagLine />
 				<Featured />
 				<Generation />
